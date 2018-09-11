@@ -32,4 +32,8 @@ public class Constants {
 	 */
 	public final static String RESULT_CODE_CHECK_FAIL="0002";
 	
+	/**
+	 * 异常码
+	 */
+	public final static String RESULT_CODE_CHECK_EXCEPTION="0004";
 }

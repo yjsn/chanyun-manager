@@ -27,6 +27,12 @@ public class BaseResult<T> {
 	 */
 	private T data;
 	
+	public BaseResult(){};
+	
+	public BaseResult(String code,T data){
+		this.code=code;
+		this.data = data;
+	}
 	
 	public String getCode() {
 		return code;
