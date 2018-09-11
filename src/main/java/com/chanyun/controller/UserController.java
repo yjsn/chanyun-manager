@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
 import com.chanyun.entity.OnlineMessage;
 import com.chanyun.service.UserService;
@@ -55,7 +56,7 @@ public class UserController extends BaseController{
 	@ApiImplicitParam(name="User",value="单个用户信息",dataType="OnlineMessage")
 	@ResponseBody
 	@PostMapping("/add")
-	public String addUser(@RequestBody String params){
+	public BaseResult addUser(@RequestBody String params){
 		OnlineMessage user = JSONObject.parseObject(params, OnlineMessage.class);
 		//注册参数较验
 		if(null == user || StringUtils.isBlank(user.getUserName()) || 

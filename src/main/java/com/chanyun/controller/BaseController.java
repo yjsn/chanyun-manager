@@ -13,18 +13,19 @@ import com.chanyun.common.BaseResult;
  *
  */
 @ApiIgnore
-public class BaseController {
+public class BaseController<T> {
 	
 	/**
 	 * 返回json数据组装
 	 * @param code
 	 * @param message
+	 * @param Object
 	 * @return
 	 */
-	public String returnBaseResult(String code,String message){
+	public BaseResult returnBaseResult(String code,T object){
 		BaseResult br = new BaseResult();
 		br.setCode(code);
-		br.setData(message);
-		return JSONObject.toJSONString(br);
+		br.setData(object);
+		return br;
 	}
 }

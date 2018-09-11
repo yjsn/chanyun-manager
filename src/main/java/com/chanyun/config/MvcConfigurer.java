@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.chanyun.common;
+package com.chanyun.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -10,15 +10,21 @@ import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.chanyun.interceptor.UrlInterceptor;
-
 /**
- * 返回静态页面 配制 类 -重写WebMvcConfigurerAdapter类中的addViewControllers 方法
- * 
- * @author liuyang
- * @Function
- * @since JDK 1.7
- * @date: 2017年3月27日 上午9:42:10
+
+* <p>Title: MvcConfigurer.java</p>  
+
+* <p>Description: 返回静态页面 配制 类 -重写WebMvcConfigurerAdapter类中的addViewControllers 方法</p>  
+
+* <p>Copyright: Copyright (c) 2018 鑫票源商务资讯有限公司</p>  
+
+* <p>Company: www.xinpiaoyuan.com</p>  
+
+* @author liuyang  
+
+* @date 2018年9月11日 
+
+* @version 1.0
  */
 @Configuration
 public class MvcConfigurer extends WebMvcConfigurerAdapter {

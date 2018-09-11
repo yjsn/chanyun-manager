@@ -1,24 +1,32 @@
-package com.chanyun.common;
+package com.chanyun.config;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
+import java.util.Properties;
 /**
- * 
- * @Description:SpringBoot集成MyBatis入口
- * 1) 创建数据) 创建SqlSessionFactory
- * @author liuyang
- * @data  2017-6-17 上午10:11:40
- *
+
+* <p>Title: MyBatisConfig.java</p>  
+
+* <p>Description:SpringBoot集成MyBatis入口, 创建SqlSessionFactory </p>  
+
+* <p>Copyright: Copyright (c) 2018 鑫票源商务资讯有限公司</p>  
+
+* <p>Company: www.xinpiaoyuan.com</p>  
+
+* @author liuyang  
+
+* @date 2018年9月11日 
+
+* @version 1.0
  */
 
 //@Configuration

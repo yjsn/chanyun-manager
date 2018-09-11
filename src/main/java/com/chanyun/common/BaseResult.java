@@ -1,12 +1,22 @@
 package com.chanyun.common;
 
+
 /**
- * 
- * @Description: 返回通用实体类
- * @author liuyang
- * @data  2017-6-17 上午10:31:11
+* <p>Title: BaseResult.java</p>  
+
+* <p>Description: 返回通用实体类</p>  
+
+* <p>Copyright: Copyright (c) 2018 鑫票源商务资讯有限公司</p>  
+
+* <p>Company: www.xinpiaoyuan.com</p>  
+
+* @author liuyang  
+
+* @date 2018年9月11日 
+
+* @version 1.0
  */
-public class BaseResult {
+public class BaseResult<T> {
 	/**
 	 * 返回码
 	 */
@@ -15,8 +25,9 @@ public class BaseResult {
 	/**
 	 * 返回json数据
 	 */
-	private String data;
-
+	private T data;
+	
+	
 	public String getCode() {
 		return code;
 	}
@@ -25,11 +36,11 @@ public class BaseResult {
 		this.code = code;
 	}
 
-	public String getData() {
+	public T getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 

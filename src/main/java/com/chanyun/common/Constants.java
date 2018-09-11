@@ -1,10 +1,19 @@
 package com.chanyun.common;
 
 /**
- * @Description:基础常量类
- * @author liuyang
- * @data  2017-6-18 上午1:10:41
- *
+* <p>Title: Constants.java</p>  
+
+* <p>Description:返回静态页面 配制 类 -重写WebMvcConfigurerAdapter类中的addViewControllers 方法 </p>  
+
+* <p>Copyright: Copyright (c) 2018 鑫票源商务资讯有限公司</p>  
+
+* <p>Company: www.xinpiaoyuan.com</p>  
+
+* @author liuyang  
+
+* @date 2018年9月11日 
+
+* @version 1.0
  */
 public class Constants {
 	

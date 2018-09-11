@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chanyun.dao.TempleMapper">
+  <resultMap id="BaseResultMap" type="com.chanyun.entity.Temple">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="temple_number" jdbcType="VARCHAR" property="templeNumber" />
+    <result column="temple_name" jdbcType="VARCHAR" property="templeName" />
+    <result column="temple_province" jdbcType="VARCHAR" property="templeProvince" />
+    <result column="temple_city" jdbcType="VARCHAR" property="templeCity" />
+    <result column="temple_county" jdbcType="VARCHAR" property="templeCounty" />
+    <result column="temple_address" jdbcType="VARCHAR" property="templeAddress" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="temple_contact_name" jdbcType="VARCHAR" property="templeContactName" />
+    <result column="temple_contact_tel" jdbcType="VARCHAR" property="templeContactTel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, temple_number, temple_name, temple_province, temple_city, temple_county, temple_address, 
+    status, temple_contact_name, temple_contact_tel, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_temple
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_temple
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chanyun.entity.Temple">
+    insert into tb_temple (id, temple_number, temple_name, 
+      temple_province, temple_city, temple_county, 
+      temple_address, status, temple_contact_name, 
+      temple_contact_tel, create_time)
+    values (#{id,jdbcType=INTEGER}, #{templeNumber,jdbcType=VARCHAR}, #{templeName,jdbcType=VARCHAR}, 
+      #{templeProvince,jdbcType=VARCHAR}, #{templeCity,jdbcType=VARCHAR}, #{templeCounty,jdbcType=VARCHAR}, 
+      #{templeAddress,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{templeContactName,jdbcType=VARCHAR}, 
+      #{templeContactTel,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chanyun.entity.Temple">
+    insert into tb_temple
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="templeNumber != null">
+        temple_number,
+      </if>
+      <if test="templeName != null">
+        temple_name,
+      </if>
+      <if test="templeProvince != null">
+        temple_province,
+      </if>
+      <if test="templeCity != null">
+        temple_city,
+      </if>
+      <if test="templeCounty != null">
+        temple_county,
+      </if>
+      <if test="templeAddress != null">
+        temple_address,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="templeContactName != null">
+        temple_contact_name,
+      </if>
+      <if test="templeContactTel != null">
+        temple_contact_tel,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="templeNumber != null">
+        #{templeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="templeName != null">
+        #{templeName,jdbcType=VARCHAR},
+      </if>
+      <if test="templeProvince != null">
+        #{templeProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="templeCity != null">
+        #{templeCity,jdbcType=VARCHAR},
+      </if>
+      <if test="templeCounty != null">
+        #{templeCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="templeAddress != null">
+        #{templeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="templeContactName != null">
+        #{templeContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="templeContactTel != null">
+        #{templeContactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chanyun.entity.Temple">
+    update tb_temple
+    <set>
+      <if test="templeNumber != null">
+        temple_number = #{templeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="templeName != null">
+        temple_name = #{templeName,jdbcType=VARCHAR},
+      </if>
+      <if test="templeProvince != null">
+        temple_province = #{templeProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="templeCity != null">
+        temple_city = #{templeCity,jdbcType=VARCHAR},
+      </if>
+      <if test="templeCounty != null">
+        temple_county = #{templeCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="templeAddress != null">
+        temple_address = #{templeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="templeContactName != null">
+        temple_contact_name = #{templeContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="templeContactTel != null">
+        temple_contact_tel = #{templeContactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chanyun.entity.Temple">
+    update tb_temple
+    set temple_number = #{templeNumber,jdbcType=VARCHAR},
+      temple_name = #{templeName,jdbcType=VARCHAR},
+      temple_province = #{templeProvince,jdbcType=VARCHAR},
+      temple_city = #{templeCity,jdbcType=VARCHAR},
+      temple_county = #{templeCounty,jdbcType=VARCHAR},
+      temple_address = #{templeAddress,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      temple_contact_name = #{templeContactName,jdbcType=VARCHAR},
+      temple_contact_tel = #{templeContactTel,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

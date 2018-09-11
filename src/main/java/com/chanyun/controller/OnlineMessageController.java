@@ -11,6 +11,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
 import com.chanyun.entity.OnlineMessage;
 import com.chanyun.service.OnlineMessageService;
@@ -23,7 +24,7 @@ public class OnlineMessageController extends BaseController {
 	
 	@ResponseBody
 	@PostMapping("/onlineMessage")
-	public String onlineMessage(@RequestBody OnlineMessage entity){
+	public BaseResult onlineMessage(@RequestBody OnlineMessage entity){
 		boolean result = onlineMessageService.add(entity);
 		if(result)
 			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "成功");
