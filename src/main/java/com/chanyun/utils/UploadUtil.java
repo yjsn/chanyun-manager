@@ -36,12 +36,12 @@ public class UploadUtil {
 	 * @param savePath
 	 * @return
 	 */
-	public BaseResult<String> singleUpload(MultipartFile file,String savePath){
+	public static BaseResult<String> singleUpload(MultipartFile file,String savePath){
 		if(file.isEmpty()){
 			return new BaseResult<String>(Constants.RESULT_CODE_CHECK_FAIL,"文件上传失败，文件内容为空");
 		}
-		String saveFileName = file.getOriginalFilename();
-		File saveFile = new File(savePath + saveFileName);
+		String saveFileName = getFileNameByTime(file.getOriginalFilename());
+		File saveFile = new File(new File(savePath) , saveFileName);
 		//检测上传路径是否存在，不存在创建路径
 		if(!saveFile.getParentFile().exists()){
 			saveFile.getParentFile().mkdirs();
@@ -71,7 +71,7 @@ public class UploadUtil {
 	 * @param savePath  上传路径
 	 * @return
 	 */
-	public BaseResult<String> uploadFiles(HttpServletRequest request,String savePath){
+	public static BaseResult<String> uploadFiles(HttpServletRequest request,String savePath){
 		File savePathFile = new File(savePath);
 		if(!savePathFile.exists()){
 			savePathFile.mkdirs();
@@ -87,7 +87,7 @@ public class UploadUtil {
 			}
 			try {
                 byte[] bytes = file.getBytes();
-                File saveFile = new File(savePathFile, file.getOriginalFilename());
+                File saveFile = new File(savePathFile, getFileNameByTime(file.getOriginalFilename()));
                 stream = new BufferedOutputStream(new FileOutputStream(saveFile));
                 stream.write(bytes);
                 stream.close();
@@ -98,6 +98,7 @@ public class UploadUtil {
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+						log.warn("文件流关闭失败");
 					}
                     stream = null;
                 }
@@ -108,4 +109,19 @@ public class UploadUtil {
 		}
 		return new BaseResult<String>(Constants.RESULT_CODE_SUCCESS,"文件上传成功");
 	}
+	
+	/**
+	 * 
+	 * @Title: getFileNameByTime   
+	 * @Description: TODO(根据时间生成文件名称)   
+	 * @param: @param fileName 原有文件名
+	 * @param: @return      
+	 * @return: String    返回新生成文件名  
+	 * @throws
+	 */
+	public static String getFileNameByTime(String fileName){
+		String suffix = fileName.substring(fileName.lastIndexOf("."));
+		return DateUtil.getCurrentTimeMillis()+suffix;
+	}
+	
 }
