@@ -1,11 +1,11 @@
 package com.chanyun.entity;
 
-public class UserRole {
+public class MerchantRole {
     private Integer id;
 
     private Integer roleId;
 
-    private Integer userId;
+    private Integer merchantId;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class UserRole {
         this.roleId = roleId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getMerchantId() {
+        return merchantId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setMerchantId(Integer merchantId) {
+        this.merchantId = merchantId;
     }
 }

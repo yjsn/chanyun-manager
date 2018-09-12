@@ -1,10 +1,9 @@
 package com.chanyun.controller;
 
+import java.util.Date;
+
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +15,7 @@ import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
 import com.chanyun.common.PageInfo;
 import com.chanyun.common.QueryParams;
+import com.chanyun.entity.MerchantAccount;
 import com.chanyun.entity.User;
 import com.chanyun.service.MerchantService;
 import com.github.pagehelper.Page;
@@ -43,19 +43,37 @@ public class MerchantController extends BaseController{
 	@Autowired
 	private MerchantService merchantService;
 	
+	/**
+	 * 添加商户
+	 * @param user
+	 * @return
+	 */
 	@PostMapping("/add")
-	@ApiImplicitParam(name="OnlineMessage",value="商户信息",dataType="OnlineMessage")
-	public BaseResult add(@RequestBody String onlineMessage){
-		Page<User> result = merchantService.queryMerchantByPage(1, 2);
+	@ApiOperation(value="添加商户接口")
+	public BaseResult<String> add(@RequestBody MerchantAccount account){
+		//设置注册时间
+		account.setCreateTime(new Date());
+		boolean reslut = merchantService.addMerchantAccount(account);
+		if(reslut)
+			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "注册成功");
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "注册失败");
+	}
+	
+	
+	/**
+	 * 查询商户列表
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/query")
+	@ApiOperation(value="商户查询接口")
+//	@ApiImplicitParam(value="商户查询返回结果",name="BaseResult",dataType="PageInfo<User>")
+	public BaseResult<PageInfo<MerchantAccount>> queryBypage(@RequestBody QueryParams<MerchantAccount> request){
+		Page<MerchantAccount> accounts = merchantService.queryMerchantByPage(request.getPageNum(), request.getPageSize(),request.getBean());
+		PageInfo<MerchantAccount> result = new PageInfo<MerchantAccount>(accounts);
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, result);
 	}
 	
-	@PostMapping("/query")
-//	@ApiImplicitParam(value="商户查询返回结果",name="BaseResult",dataType="PageInfo<User>")
-	public BaseResult<PageInfo<User>> queryBypage(@RequestBody QueryParams<User> request){
-		Page<User> users = merchantService.queryMerchantByPage(request.getPageNum(), request.getPageSize());
-		PageInfo<User> result = new PageInfo<User>(users);
-		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, result);
-	}
+	
 
 }

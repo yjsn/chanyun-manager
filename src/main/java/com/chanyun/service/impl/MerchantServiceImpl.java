@@ -3,7 +3,9 @@ package com.chanyun.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chanyun.dao.MerchantAccountMapper;
 import com.chanyun.dao.UserMapper;
+import com.chanyun.entity.MerchantAccount;
 import com.chanyun.entity.User;
 import com.chanyun.service.MerchantService;
 import com.github.pagehelper.Page;
@@ -29,12 +31,20 @@ import com.github.pagehelper.PageHelper;
 @Service
 public class MerchantServiceImpl implements MerchantService{
 	@Autowired
-	private UserMapper userMapper;
+	private MerchantAccountMapper accountMapper;
 	
 	@Override
-	public Page<User> queryMerchantByPage(int pageNo, int pageSize) {
+	public Page<MerchantAccount> queryMerchantByPage(int pageNo, int pageSize,MerchantAccount account) {
 		PageHelper.startPage(pageNo,pageSize);
-		return userMapper.findByPage();
+		return accountMapper.findByPage(account);
+	}
+
+	@Override
+	public boolean addMerchantAccount(MerchantAccount account) {
+		int i = accountMapper.insert(account);
+		if(i>0)
+			return true;
+		return false;
 	}
 
 }
