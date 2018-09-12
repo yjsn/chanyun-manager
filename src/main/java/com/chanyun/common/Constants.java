@@ -36,4 +36,9 @@ public class Constants {
 	 * 异常码
 	 */
 	public final static String RESULT_CODE_CHECK_EXCEPTION="0004";
+	
+	/**
+	 * 未登陆
+	 */
+	public final static String RESULT_CODE_LOGIN_OUT="0009";
 }

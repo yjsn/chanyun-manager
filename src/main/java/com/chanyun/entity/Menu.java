@@ -1,16 +1,21 @@
 package com.chanyun.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("菜单栏实体类")
 public class Menu {
+	@ApiModelProperty(value="id",readOnly=true )
     private Integer id;
-
+	@ApiModelProperty(value="icon样式")
     private String icon;
-
+	@ApiModelProperty(value="菜单名称")
     private String name;
-
+	@ApiModelProperty(value="菜单状态")
     private Integer state;
-
+	@ApiModelProperty(value="菜单url")
     private String url;
-
+	@ApiModelProperty(value="父级id -1为一级菜单")
     private Integer pId;
 
     public Integer getId() {

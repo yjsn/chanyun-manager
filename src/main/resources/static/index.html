@@ -4,10 +4,12 @@
     <title>文件上传界面</title>
 </head>
 <body>
-    <form enctype="multipart/form-data" method="post" action="/upload">
-        选择文件：<input type="file" name="file" />
+    <form enctype="multipart/form-data" method="post" action="/api/merchant/loginTest">
+        用户名：<input type="text" name="accountNumber" />
         <br />
-        <button type="submit">上传</button>
+         密码：<input type="text" name="accountPassword" />
+        <br />
+        <button type="submit">登陆</button>
         <span>&nbsp;&nbsp;</span>
         <button type="reset">重选</button>
     </form>

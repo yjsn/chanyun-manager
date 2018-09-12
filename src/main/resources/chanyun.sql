@@ -104,18 +104,30 @@ CREATE TABLE `tb_user` (
 
 insert  into `tb_user`(`id`,`bz`,`password`,`true_name`,`user_name`,`remarks`) values (1,'管理员','1','赵佳涛','admin','1'),(2,'主管','123','王大锤','jack','2'),(3,'销售经理','123','玛丽','marry','33'),(5,'1','111111','1','111111',NULL),(6,'2','222222','2','222222',NULL),(7,'3','333333','3','333333',NULL),(8,'','444444','44','444444',NULL),(9,'5','555555','5','555555',NULL),(11,'7','777777','7','777777',NULL),(12,'88','888888','88','888888',NULL),(13,'9','999999','9','999999',NULL),(14,'121212','121212','121212','121212',NULL);
 
-/*Table structure for table `tb_user_role` */
+/*Table structure for table `tb_merchant_role` */
 
-DROP TABLE IF EXISTS `tb_user_role`;
+DROP TABLE IF EXISTS `tb_merchant_role`;
 
-CREATE TABLE `tb_user_role` (
+CREATE TABLE `tb_merchant_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `merchant_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
-/*Data for the table `tb_user_role` */
+/*Data for the table `tb_merchant_role` */
 
-insert  into `tb_user_role`(`id`,`role_id`,`user_id`) values (1,1,1),(19,2,2),(20,4,2),(21,5,2),(28,2,3),(29,4,3),(30,5,3),(31,7,3),(49,15,5),(50,1,5);
+
+
+CREATE TABLE `tb_merchant_account` (                                                                              
+                       `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',                                                              
+                       `account_number` varchar(50) NOT NULL COMMENT '账号',                                                         
+                       `account_password` varchar(50) NOT NULL COMMENT '密码',                                                       
+                       `account_name` varchar(100) NOT NULL COMMENT '用户名称',                                                    
+                       `temple_id` int(11) NOT NULL COMMENT '所属寺庙Id',                                                          
+                       `status` int(2) NOT NULL COMMENT '状态 0 启用 1禁用',                                                     
+                       `remark` varchar(100) DEFAULT NULL COMMENT '备注',                                                            
+                       `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',  
+                       PRIMARY KEY (`id`)                                                                                              
+                     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8   
  

@@ -2,6 +2,7 @@ package com.chanyun.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,9 @@ import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
 import com.chanyun.common.PageInfo;
 import com.chanyun.common.QueryParams;
+import com.chanyun.entity.Menu;
 import com.chanyun.entity.MerchantAccount;
+import com.chanyun.service.MenuService;
 import com.chanyun.service.MerchantService;
 import com.github.pagehelper.Page;
 
@@ -47,6 +50,8 @@ import com.github.pagehelper.Page;
 public class MerchantController extends BaseController<Object>{
 	@Autowired
 	private MerchantService merchantService;
+	@Autowired
+	private MenuService menuService;
 	
 	/**
 	 * 添加商户
@@ -96,7 +101,7 @@ public class MerchantController extends BaseController<Object>{
 	@ApiOperation(value="用户登陆接口")
 	@PostMapping("/login")
 	@ResponseBody
-	//TODO 
+	//TODO 单机登陆，后期部署需要换成redis记录登陆状态
 	public BaseResult<MerchantAccount> login(@RequestBody MerchantAccount account,HttpServletRequest request){
 		Map<String, Object> queryParams = new HashMap<String, Object>();
 		HttpSession session = request.getSession();
@@ -120,4 +125,49 @@ public class MerchantController extends BaseController<Object>{
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",result);
 	}
 
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value="用户登陆接口")
+	@PostMapping("/permission")
+	@ResponseBody
+	public BaseResult<List<Menu>> queryUserPermission(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		MerchantAccount account =(MerchantAccount) session.getAttribute("merchantAccount");
+		if(null == account)
+			return returnBaseResult(Constants.RESULT_CODE_LOGIN_OUT, "未登陆",null);
+		
+		//获取用户权限
+		int merchantId = account.getId();
+		List<Menu> result = menuService.queryMenuByMerchantId(merchantId);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",result);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value="用户登陆测试接口")
+	@PostMapping("/loginTest")
+	@ResponseBody
+	//TODO 正式联调删除
+	public BaseResult<MerchantAccount> login( String accountNumber, String accountPassword,HttpServletRequest request){
+		Map<String, Object> queryParams = new HashMap<String, Object>();
+		HttpSession session = request.getSession();
+		MerchantAccount result =(MerchantAccount) session.getAttribute("merchantAccount");
+		if(null != result){
+			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "用户已经登陆",result);
+		}
+		if(accountNumber.isEmpty() || accountPassword.isEmpty()){
+			return returnBaseResult(Constants.RESULT_CODE_CHECK_FAIL, "账号或密码不能空",null);
+		}
+		queryParams.put("accountNumber", accountNumber);
+		queryParams.put("accountPassword", accountPassword);
+		result=merchantService.queryMerchantAccountByParams(queryParams);
+		if(null == result){
+			return returnBaseResult(Constants.RESULT_CODE_FAIL, "账号不存在，或密码错误",null);
+		}
+		if(result.getStatus() != 0){
+			return returnBaseResult(Constants.RESULT_CODE_FAIL, "账号已经被封禁，请联系网站管理员！",null);
+		}
+		session.setAttribute("merchantAccount", result);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",result);
+	}
+	
+	
 }

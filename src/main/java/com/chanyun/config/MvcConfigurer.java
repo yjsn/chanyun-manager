@@ -3,12 +3,18 @@
  */
 package com.chanyun.config;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.chanyun.interceptor.LoginInterceptor;
 
 /**
 
@@ -27,11 +33,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 * @version 1.0
  */
 @Configuration
-public class MvcConfigurer extends WebMvcConfigurerAdapter {
+public class MvcConfigurer extends WebMvcConfigurerAdapter{
+	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("forward:/index.html");
-		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		registry.setOrder(Ordered.LOWEST_PRECEDENCE);
 	}
 
 	@Override
@@ -45,8 +52,8 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         // 多个拦截器组成一个拦截器链  
         // addPathPatterns 用于添加拦截规则  
         // excludePathPatterns 用户排除拦截  
-//        registry.addInterceptor(new UrlInterceptor()).addPathPatterns("/**").excludePathPatterns("/api/**");  
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/api/**").excludePathPatterns("/api/merchant/loginTest");  
         super.addInterceptors(registry);  
-    }  
+    }
 
 }

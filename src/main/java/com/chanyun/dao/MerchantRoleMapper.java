@@ -14,4 +14,5 @@ public interface MerchantRoleMapper {
     int updateByPrimaryKeySelective(MerchantRole record);
 
     int updateByPrimaryKey(MerchantRole record);
+    
 }

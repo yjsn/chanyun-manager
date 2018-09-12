@@ -101,4 +101,13 @@
       p_id = #{pId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectMenuByMerchantId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	 select 
+    <include refid="Base_Column_List" />
+    from tb_menu
+    where id in(
+    	select menu_id from tb_role_menu where role_id in (select role_id from tb_merchant_role where merchant_id = #{merchantId,jdbcType=INTEGER})
+    )
+  </select>
 </mapper>

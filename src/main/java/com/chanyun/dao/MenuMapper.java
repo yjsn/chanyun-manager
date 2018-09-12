@@ -1,5 +1,7 @@
 package com.chanyun.dao;
 
+import java.util.List;
+
 import com.chanyun.entity.Menu;
 
 public interface MenuMapper {
@@ -14,4 +16,14 @@ public interface MenuMapper {
     int updateByPrimaryKeySelective(Menu record);
 
     int updateByPrimaryKey(Menu record);
+    
+    /**
+     * @Title: selectByParams   
+     * @Description: 查询用户权限
+     * @param: @param merchantId 用户id
+     * @param: @return      
+     * @return: List<Menu>      
+     * @throws
+     */
+    List<Menu> selectMenuByMerchantId(int merchantId);
 }

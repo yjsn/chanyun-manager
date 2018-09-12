@@ -47,6 +47,7 @@ public class ChanyunManagerApplicationStart {
                 ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/index.html");
 
                 container.addErrorPages(error404Page);
+                container.setSessionTimeout(1800);//单位s
             }
         };
     }
@@ -66,4 +67,5 @@ public class ChanyunManagerApplicationStart {
         new SqlSessionFactoryBean().setPlugins(new Interceptor[]{pageHelper});
         return pageHelper;
     }
+	
 }
