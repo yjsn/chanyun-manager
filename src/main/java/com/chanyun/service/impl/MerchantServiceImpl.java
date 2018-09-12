@@ -1,5 +1,7 @@
 package com.chanyun.service.impl;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,17 @@ public class MerchantServiceImpl implements MerchantService{
 			return true;
 		return false;
 	}
-
+	
+	@Override
+	public boolean selectMerchantAccountIsSave(Map params) {
+		int i=accountMapper.findCountByParams(params);
+		if(i>0) return true;
+		return false;
+	}
+	
+	@Override
+	public MerchantAccount queryMerchantAccountByParams(Map params) {
+		
+		return accountMapper.selectByParams(params);
+	}
 }

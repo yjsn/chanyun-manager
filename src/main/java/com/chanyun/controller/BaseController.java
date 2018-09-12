@@ -22,9 +22,10 @@ public class BaseController<T> {
 	 * @param Object
 	 * @return
 	 */
-	public BaseResult returnBaseResult(String code,T object){
+	public BaseResult returnBaseResult(String code,String message,T object){
 		BaseResult br = new BaseResult();
 		br.setCode(code);
+		br.setMessage(message);
 		br.setData(object);
 		return br;
 	}

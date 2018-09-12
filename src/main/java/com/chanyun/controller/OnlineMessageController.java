@@ -27,7 +27,7 @@ public class OnlineMessageController extends BaseController {
 	public BaseResult onlineMessage(@RequestBody OnlineMessage entity){
 		boolean result = onlineMessageService.add(entity);
 		if(result)
-			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "成功");
-		return returnBaseResult(Constants.RESULT_CODE_FAIL, "失败");
+			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "成功",null);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "失败",null);
 	}
 }

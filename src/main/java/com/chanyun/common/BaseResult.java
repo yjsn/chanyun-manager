@@ -23,6 +23,11 @@ public class BaseResult<T> {
 	private String code;
 	
 	/**
+	 * 返回信息提示
+	 */
+	private String message;
+	
+	/**
 	 * 返回json数据
 	 */
 	private T data;
@@ -48,6 +53,14 @@ public class BaseResult<T> {
 
 	public void setData(T data) {
 		this.data = data;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	

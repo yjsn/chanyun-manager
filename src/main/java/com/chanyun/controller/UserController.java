@@ -61,9 +61,9 @@ public class UserController extends BaseController{
 		//注册参数较验
 		if(null == user || StringUtils.isBlank(user.getUserName()) || 
 				StringUtils.isBlank(user.getMessageContent()))//必填参数较验不通过
-			return returnBaseResult(Constants.RESULT_CODE_CHECK_FAIL, "用户名密码不能为空");
+			return returnBaseResult(Constants.RESULT_CODE_CHECK_FAIL, "用户名密码不能为空",null);
 		boolean result = userService.add(user);
-		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "注册成功");
-		return returnBaseResult(Constants.RESULT_CODE_FAIL, "注册失败，数据保存异常");
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "注册成功",null);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "注册失败，数据保存异常",null);
 	}
 }
