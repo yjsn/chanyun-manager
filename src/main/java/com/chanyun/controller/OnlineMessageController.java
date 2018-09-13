@@ -18,6 +18,7 @@ import com.chanyun.service.OnlineMessageService;
 
 @Controller
 @RequestMapping(value="/api")
+@ApiIgnore
 public class OnlineMessageController extends BaseController {
 	@Autowired
 	private OnlineMessageService onlineMessageService;

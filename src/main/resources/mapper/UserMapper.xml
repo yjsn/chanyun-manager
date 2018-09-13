@@ -3,14 +3,19 @@
 <mapper namespace="com.chanyun.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.chanyun.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="bz" jdbcType="VARCHAR" property="bz" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="true_name" jdbcType="VARCHAR" property="trueName" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="webchat_id" jdbcType="VARCHAR" property="webchatId" />
+    <result column="merits_account" jdbcType="INTEGER" property="meritsAccount" />
+    <result column="merits_self_account" jdbcType="INTEGER" property="meritsSelfAccount" />
+    <result column="regist_time" jdbcType="TIMESTAMP" property="registTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, bz, password, true_name, user_name, remarks
+    id, user_name, user_account, user_password, user_phone, webchat_id, merits_account, 
+    merits_self_account, regist_time, last_login_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,12 +28,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.chanyun.entity.User">
-    insert into tb_user (id, bz, password, 
-      true_name, user_name, remarks
-      )
-    values (#{id,jdbcType=INTEGER}, #{bz,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{trueName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
-      )
+    insert into tb_user (id, user_name, user_account, 
+      user_password, user_phone, webchat_id, 
+      merits_account, merits_self_account, regist_time, 
+      last_login_time)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{webchatId,jdbcType=VARCHAR}, 
+      #{meritsAccount,jdbcType=INTEGER}, #{meritsSelfAccount,jdbcType=INTEGER}, #{registTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.chanyun.entity.User">
     insert into tb_user
@@ -36,77 +43,146 @@
       <if test="id != null">
         id,
       </if>
-      <if test="bz != null">
-        bz,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="trueName != null">
-        true_name,
-      </if>
       <if test="userName != null">
         user_name,
       </if>
-      <if test="remarks != null">
-        remarks,
+      <if test="userAccount != null">
+        user_account,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="webchatId != null">
+        webchat_id,
+      </if>
+      <if test="meritsAccount != null">
+        merits_account,
+      </if>
+      <if test="meritsSelfAccount != null">
+        merits_self_account,
+      </if>
+      <if test="registTime != null">
+        regist_time,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="bz != null">
-        #{bz,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="trueName != null">
-        #{trueName,jdbcType=VARCHAR},
-      </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="remarks != null">
-        #{remarks,jdbcType=VARCHAR},
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="webchatId != null">
+        #{webchatId,jdbcType=VARCHAR},
+      </if>
+      <if test="meritsAccount != null">
+        #{meritsAccount,jdbcType=INTEGER},
+      </if>
+      <if test="meritsSelfAccount != null">
+        #{meritsSelfAccount,jdbcType=INTEGER},
+      </if>
+      <if test="registTime != null">
+        #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.chanyun.entity.User">
     update tb_user
     <set>
-      <if test="bz != null">
-        bz = #{bz,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="trueName != null">
-        true_name = #{trueName,jdbcType=VARCHAR},
-      </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="remarks != null">
-        remarks = #{remarks,jdbcType=VARCHAR},
+      <if test="userAccount != null">
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="webchatId != null">
+        webchat_id = #{webchatId,jdbcType=VARCHAR},
+      </if>
+      <if test="meritsAccount != null">
+        merits_account = #{meritsAccount,jdbcType=INTEGER},
+      </if>
+      <if test="meritsSelfAccount != null">
+        merits_self_account = #{meritsSelfAccount,jdbcType=INTEGER},
+      </if>
+      <if test="registTime != null">
+        regist_time = #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.chanyun.entity.User">
     update tb_user
-    set bz = #{bz,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      true_name = #{trueName,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=VARCHAR}
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_account = #{userAccount,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      webchat_id = #{webchatId,jdbcType=VARCHAR},
+      merits_account = #{meritsAccount,jdbcType=INTEGER},
+      merits_self_account = #{meritsSelfAccount,jdbcType=INTEGER},
+      regist_time = #{registTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="findByPage" resultMap="BaseResultMap">
-  	select 
-  	<include refid="Base_Column_List"></include>
-  	from tb_user
+  <select id="selectByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	 select 
+    	user_account,user_phone,user_name,merits_account,last_login_time
+    from tb_user
+    <trim prefix="where" prefixOverrides="and">
+      <if test="userName != null and userName!= ''">
+        and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="userAccount != null and userAccount != ''">
+        and user_account = #{userAccount,jdbcType=VARCHAR}
+      </if>
+      <if test="userPassword != null  and userPassword != ''">
+        and user_password = #{userPassword,jdbcType=VARCHAR}
+      </if>
+      <if test="userPhone != null  and userPhone != ''">
+        and user_phone = #{userPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="webchatId != null  and webchatId != ''">
+        and webchat_id = #{webchatId,jdbcType=VARCHAR}
+      </if>
+      <if test="meritsAccount != null  and meritsAccount != ''">
+        and merits_account = #{meritsAccount,jdbcType=INTEGER}
+      </if>
+      <if test="meritsSelfAccount != null  and meritsSelfAccount != ''">
+        and merits_self_account = #{meritsSelfAccount,jdbcType=INTEGER}
+      </if>
+      <if test="registTime != null  and registTime != ''">
+        and regist_time = #{registTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastLoginTime != null  and lastLoginTime != ''">
+        and last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
   </select>
 </mapper>

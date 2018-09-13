@@ -1,22 +1,27 @@
 package com.chanyun.entity;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 
-@ApiModel("商户管理表")
 public class User {
-	@ApiModelProperty(value="id",readOnly=true)
     private Integer id;
-	@ApiModelProperty(value="角色名称")
-    private String bz;
-	@ApiModelProperty(value="登陆密码")
-    private String password;
-	@ApiModelProperty(value="姓名")
-    private String trueName;
-	@ApiModelProperty(value="登陆账号")
+
     private String userName;
-	@ApiModelProperty(value="备注")
-    private String remarks;
+
+    private String userAccount;
+
+    private String userPassword;
+
+    private String userPhone;
+
+    private String webchatId;
+
+    private Integer meritsAccount;
+
+    private Integer meritsSelfAccount;
+
+    private Date registTime;
+
+    private Date lastLoginTime;
 
     public Integer getId() {
         return id;
@@ -24,30 +29,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getBz() {
-        return bz;
-    }
-
-    public void setBz(String bz) {
-        this.bz = bz == null ? null : bz.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getTrueName() {
-        return trueName;
-    }
-
-    public void setTrueName(String trueName) {
-        this.trueName = trueName == null ? null : trueName.trim();
     }
 
     public String getUserName() {
@@ -58,11 +39,67 @@ public class User {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getUserAccount() {
+        return userAccount;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount == null ? null : userAccount.trim();
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword == null ? null : userPassword.trim();
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone == null ? null : userPhone.trim();
+    }
+
+    public String getWebchatId() {
+        return webchatId;
+    }
+
+    public void setWebchatId(String webchatId) {
+        this.webchatId = webchatId == null ? null : webchatId.trim();
+    }
+
+    public Integer getMeritsAccount() {
+        return meritsAccount;
+    }
+
+    public void setMeritsAccount(Integer meritsAccount) {
+        this.meritsAccount = meritsAccount;
+    }
+
+    public Integer getMeritsSelfAccount() {
+        return meritsSelfAccount;
+    }
+
+    public void setMeritsSelfAccount(Integer meritsSelfAccount) {
+        this.meritsSelfAccount = meritsSelfAccount;
+    }
+
+    public Date getRegistTime() {
+        return registTime;
+    }
+
+    public void setRegistTime(Date registTime) {
+        this.registTime = registTime;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
+import com.chanyun.common.PageInfo;
+import com.chanyun.common.QueryParams;
 import com.chanyun.entity.OnlineMessage;
+import com.chanyun.entity.User;
 import com.chanyun.service.UserService;
 
 /**
@@ -34,36 +38,16 @@ public class UserController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
-	/**
-	 * 用户注册/登陆初始化页面
-	 * @param flag 注册登陆标识
-	 * @return 返回页面
-	 */
-	@PostMapping("/init")
-	public String init(String flag){
-		if("reg".equals(flag))
-			return "/user/register";
-		return "user/login";
-	}
-	
-	
-	/**
-	 * 用户注册接口
-	 * @param user 用户信息对象
-	 * @return 返回json数据
-	 */
-	@ApiOperation("用户注册")
-	@ApiImplicitParam(name="User",value="单个用户信息",dataType="OnlineMessage")
+	@SuppressWarnings("unchecked")
 	@ResponseBody
-	@PostMapping("/add")
-	public BaseResult addUser(@RequestBody String params){
-		OnlineMessage user = JSONObject.parseObject(params, OnlineMessage.class);
-		//注册参数较验
-		if(null == user || StringUtils.isBlank(user.getUserName()) || 
-				StringUtils.isBlank(user.getMessageContent()))//必填参数较验不通过
-			return returnBaseResult(Constants.RESULT_CODE_CHECK_FAIL, "用户名密码不能为空",null);
-		boolean result = userService.add(user);
-		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "注册成功",null);
-		return returnBaseResult(Constants.RESULT_CODE_FAIL, "注册失败，数据保存异常",null);
+	@PostMapping("/findUserList")
+	@ApiOperation("分页查询用户信息列表")
+	public BaseResult<PageInfo<User>> findUserByPage(@RequestBody QueryParams<User> request){
+		User user = request.getBean();
+		Map params = new HashMap<String, Object>();
+		params.put("userAccount", user.getUserAccount());
+		params.put("userPhone", user.getUserPhone());
+		PageInfo<User> result = userService.findByPage(request.getPageNum(), request.getPageSize(), params);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功", result);
 	}
 }
