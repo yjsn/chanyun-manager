@@ -22,9 +22,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chanyun.common.PageInfo;
 import com.chanyun.dao.MenuMapper;
 import com.chanyun.entity.Menu;
 import com.chanyun.service.MenuService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 
 /**  
 
@@ -56,6 +59,34 @@ public class MenuServiceImpl implements MenuService {
 	public List<Menu> queryMenuByMerchantId(Integer merchantId) {
 		
 		return menuMapper.selectMenuByMerchantId(merchantId);
+	}
+
+	@Override
+	public PageInfo<Menu> findMenuByPage(int pageNum, int pageSize, Menu menu) {
+		PageHelper.startPage(pageNum, pageSize);
+		Page<Menu> page = menuMapper.selectMenuByPage(menu);
+		PageInfo<Menu> result = new PageInfo<Menu>(page);
+		return result;
+	}
+
+	@Override
+	public Menu findMenuById(int id) {
+		
+		return menuMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public boolean addMenu(Menu menu) {
+		int i = menuMapper.insert(menu);
+		if(i >0 ) return true;
+		return false;
+	}
+
+	@Override
+	public boolean editMenu(Menu menu) {
+		int i = menuMapper.updateByPrimaryKeySelective(menu);
+		if(i >0 ) return true;
+		return false;
 	}
 
 }

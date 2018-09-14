@@ -31,7 +31,7 @@ import com.chanyun.service.UserService;
  * @data  2017-6-17 上午10:10:32
  *
  */
-@Api(value="用户信息管理")
+@Api(value="用户信息管理",tags="用户信息接口")
 @Controller
 @RequestMapping(value="/user")
 public class UserController extends BaseController{

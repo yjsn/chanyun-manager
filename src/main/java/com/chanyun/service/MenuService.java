@@ -19,6 +19,7 @@ package com.chanyun.service;
 
 import java.util.List;
 
+import com.chanyun.common.PageInfo;
 import com.chanyun.entity.Menu;
 
 /**  
@@ -49,4 +50,34 @@ public interface MenuService {
 	 * @throws
 	 */
 	public List<Menu> queryMenuByMerchantId(Integer merchantId);
+	
+	/**
+	 * 分页查询菜单列表
+	 * @param pageNum 	起始页
+	 * @param pageSize	页面展示数据条数
+	 * @param menu		查询条件
+	 * @return
+	 */
+	public PageInfo<Menu> findMenuByPage(int pageNum,int pageSize,Menu menu);
+	
+	/**
+	 * 根据id查询菜单
+	 * @param id 菜单id
+	 * @return
+	 */
+	public Menu findMenuById(int id);
+	
+	/**
+	 * 新增菜单
+	 * @param menu
+	 * @return
+	 */
+	public boolean addMenu(Menu menu);
+	
+	/**
+	 * 更新菜单数据
+	 * @param menu
+	 * @return
+	 */
+	public boolean editMenu(Menu menu);
 }

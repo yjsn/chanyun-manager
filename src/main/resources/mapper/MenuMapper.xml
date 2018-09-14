@@ -110,4 +110,27 @@
     	select menu_id from tb_role_menu where role_id in (select role_id from tb_merchant_role where merchant_id = #{merchantId,jdbcType=INTEGER})
     ) and state=0
   </select>
+  
+  <select id="selectMenuByPage" parameterType="com.chanyun.entity.Menu" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from tb_menu
+    <trim prefix="where" prefixOverrides="and">
+      <if test="icon != null">
+        and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="state != null">
+        and state = #{state,jdbcType=INTEGER}
+      </if>
+      <if test="url != null">
+        and url = #{url,jdbcType=VARCHAR}
+      </if>
+      <if test="pId != null">
+        and p_id = #{pId,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.chanyun.dao;
 import java.util.List;
 
 import com.chanyun.entity.Menu;
+import com.github.pagehelper.Page;
 
 public interface MenuMapper {
     int deleteByPrimaryKey(Integer id);
@@ -26,4 +27,11 @@ public interface MenuMapper {
      * @throws
      */
     List<Menu> selectMenuByMerchantId(int merchantId);
+    
+    /**
+     * 分页查询菜单列表
+     * @param menu
+     * @return
+     */
+    Page<Menu> selectMenuByPage(Menu menu);
 }
