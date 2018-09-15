@@ -3,6 +3,7 @@ package com.chanyun.dao;
 import java.util.List;
 
 import com.chanyun.entity.Role;
+import com.github.pagehelper.Page;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
@@ -26,4 +27,11 @@ public interface RoleMapper {
      * @throws
      */
     List<Role> selectByMerchantId(int merchantId);
+    
+    /**
+     * 分页查询角色列表
+     * @param role
+     * @return
+     */
+    Page<Role> selectByPage(Role role);
 }

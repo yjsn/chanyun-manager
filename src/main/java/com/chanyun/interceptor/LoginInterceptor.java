@@ -39,7 +39,9 @@ public class LoginInterceptor implements HandlerInterceptor{
         	response.setHeader("Access-Control-Allow-Methods", "*");
         	response.setHeader("Access-Control-Allow-Headers","Origin,Content-Type,Accept,token,X-Requested-With");
             response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("contentType", "application/json;charset=utf-8");
+            response.setContentType("application/json;charset=utf-8");
+            response.setCharacterEncoding("UTF-8");
+            
             if(session.getAttribute("merchantAccount") == null){
             	BaseResult<String> result = new BaseResult<String>();
             	result.setCode(Constants.RESULT_CODE_LOGIN_OUT);

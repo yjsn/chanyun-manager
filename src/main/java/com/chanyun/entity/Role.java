@@ -1,12 +1,18 @@
 package com.chanyun.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("角色实体类")
 public class Role {
+	@ApiModelProperty(value="角色id",readOnly=true,required=true)
     private Integer id;
-
-    private String bz;
-
+	
+	@ApiModelProperty("状态 0 启用 1禁用")
+    private int status;
+	@ApiModelProperty("角色名称")
     private String name;
-
+	@ApiModelProperty("备注")
     private String remarks;
 
     public Integer getId() {
@@ -17,12 +23,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getBz() {
-        return bz;
+    public int getStatus() {
+        return status;
     }
 
-    public void setBz(String bz) {
-        this.bz = bz == null ? null : bz.trim();
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getName() {

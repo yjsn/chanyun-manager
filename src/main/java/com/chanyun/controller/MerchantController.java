@@ -126,7 +126,7 @@ public class MerchantController extends BaseController<Object>{
 	}
 
 	@SuppressWarnings("unchecked")
-	@ApiOperation(value="用户登陆接口")
+	@ApiOperation(value="用户权限查询")
 	@PostMapping("/permission")
 	@ResponseBody
 	public BaseResult<List<Menu>> queryUserPermission(HttpServletRequest request){
