@@ -207,4 +207,59 @@
       news_source = #{newsSource,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectIndexNews" resultMap="BaseResultMap">
+  		select 
+  		<include refid="Base_Column_List" />
+    	,
+    	<include refid="Blob_Column_List" />
+  		 from tb_news 
+  		 where news_status=0 and news_recommend=0 
+  		 order by news_sort ASC,create_time desc LIMIT 10;
+  </select>
+  
+  <select id="selectNewsByPage" parameterType="com.chanyun.entity.News" resultMap="ResultMapWithBLOBs">
+  		select 
+  		<include refid="Base_Column_List" />
+    	,
+    	<include refid="Blob_Column_List" />
+  		 from tb_news 
+  		 <trim prefix="where" prefixOverrides="and">
+  		 	  <if test="newsTitle != null">
+		         and news_title = #{newsTitle,jdbcType=VARCHAR}
+		      </if>
+		      <if test="newsDescription != null">
+		        and news_description = #{newsDescription,jdbcType=VARCHAR}
+		      </if>
+		      <if test="newsKeywords != null">
+		        and news_keywords = #{newsKeywords,jdbcType=VARCHAR}
+		      </if>
+		      <if test="newsType != null">
+		        and news_type = #{newsType,jdbcType=INTEGER}
+		      </if>
+		      <if test="newsImg != null">
+		        and news_img = #{newsImg,jdbcType=VARCHAR}
+		      </if>
+		      <if test="newsSort != null">
+		        and news_sort = #{newsSort,jdbcType=INTEGER}
+		      </if>
+		      <if test="newsStatus != null">
+		        and news_status = #{newsStatus,jdbcType=INTEGER}
+		      </if>
+		      <if test="newsRecommend != null">
+		        and news_recommend = #{newsRecommend,jdbcType=INTEGER}
+		      </if>
+		      <if test="newsTempleid != null">
+		        and news_templeid = #{newsTempleid,jdbcType=INTEGER}
+		      </if>
+		      <if test="createTime != null">
+		        and create_time = #{createTime,jdbcType=TIMESTAMP}
+		      </if>
+		      <if test="newsSource != null">
+		        and news_source = #{newsSource,jdbcType=VARCHAR}
+		      </if>
+		      <if test="newsContent != null">
+		        and news_content = #{newsContent,jdbcType=LONGVARCHAR}
+		      </if>
+  		 </trim>
+  </select>
 </mapper>

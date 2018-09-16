@@ -1,26 +1,33 @@
 package com.chanyun.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+@ApiModel("用户数据类")
 public class User {
+	@ApiModelProperty(value="用户id",readOnly=true,required=true)
     private Integer id;
-
+	@ApiModelProperty(value="用户姓名")
     private String userName;
-
+	@ApiModelProperty(value="用户账号")
     private String userAccount;
-
+	@ApiModelProperty(value="用户密码")
     private String userPassword;
-
+	@ApiModelProperty(value="用户手机号")
     private String userPhone;
-
+	@ApiModelProperty(value="用户微信id",hidden=true)
     private String webchatId;
-
+	@ApiModelProperty(value="用户功德数")
     private Integer meritsAccount;
-
+	@ApiModelProperty(value="用户自身功德数",hidden=true)
     private Integer meritsSelfAccount;
-
+	@ApiModelProperty(value="用户注册时间")
     private Date registTime;
-
+	@ApiModelProperty(value="用户最后一次登陆时间")
     private Date lastLoginTime;
 
     public Integer getId() {

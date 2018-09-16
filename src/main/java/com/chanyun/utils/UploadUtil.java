@@ -38,7 +38,7 @@ public class UploadUtil {
 	 */
 	public static BaseResult<String> singleUpload(MultipartFile file,String savePath){
 		if(file.isEmpty()){
-			return new BaseResult<String>(Constants.RESULT_CODE_CHECK_FAIL,"文件上传失败，文件内容为空");
+			return new BaseResult<String>(Constants.RESULT_CODE_CHECK_FAIL,"文件上传失败，文件内容为空","");
 		}
 		String saveFileName = getFileNameByTime(file.getOriginalFilename());
 		File saveFile = new File(new File(savePath) , saveFileName);
@@ -55,14 +55,14 @@ public class UploadUtil {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			log.error("文件上传失败,"+e.getMessage());
-			return new BaseResult<String>(Constants.RESULT_CODE_CHECK_EXCEPTION,"文件上传失败,"+e.getMessage());
+			return new BaseResult<String>(Constants.RESULT_CODE_CHECK_EXCEPTION,"文件上传失败,"+e.getMessage(),"");
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.error("文件上传失败,"+e.getMessage());
-			return new BaseResult<String>(Constants.RESULT_CODE_CHECK_EXCEPTION,"文件上传失败,"+e.getMessage());
+			return new BaseResult<String>(Constants.RESULT_CODE_CHECK_EXCEPTION,"文件上传失败,"+e.getMessage(),"");
 		}
 		
-		return new BaseResult<String>(Constants.RESULT_CODE_SUCCESS,"文件上传成功");
+		return new BaseResult<String>(Constants.RESULT_CODE_SUCCESS,"文件上传成功",saveFile.getPath());
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class UploadUtil {
 		for (int i = 0; i < files.size(); i++) {
 			file = files.get(i);
 			if(file.isEmpty()){
-				return new BaseResult<String>(Constants.RESULT_CODE_CHECK_FAIL,"文件上传失败，第"+i+"文件内容为空");
+				return new BaseResult<String>(Constants.RESULT_CODE_CHECK_FAIL,"文件上传失败，第"+i+"文件内容为空","");
 			}
 			try {
                 byte[] bytes = file.getBytes();
@@ -102,12 +102,12 @@ public class UploadUtil {
 					}
                     stream = null;
                 }
-                return new BaseResult<String>(Constants.RESULT_CODE_CHECK_EXCEPTION,"文件上传失败,第 " + i + " 个文件上传有错误" + e.getMessage());
+                return new BaseResult<String>(Constants.RESULT_CODE_CHECK_EXCEPTION,"文件上传失败,第 " + i + " 个文件上传有错误" + e.getMessage(),"");
             }
 
 			
 		}
-		return new BaseResult<String>(Constants.RESULT_CODE_SUCCESS,"文件上传成功");
+		return new BaseResult<String>(Constants.RESULT_CODE_SUCCESS,"文件上传成功","");
 	}
 	
 	/**

@@ -1,32 +1,37 @@
 package com.chanyun.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
+@ApiModel("资讯信息")
 public class News {
+	@ApiModelProperty(value="资讯id",readOnly=true)
     private Integer id;
-
+	@ApiModelProperty(value="资讯头")
     private String newsTitle;
-
+	@ApiModelProperty(value="资讯描述")
     private String newsDescription;
-
+	@ApiModelProperty(value="资讯关键字")
     private String newsKeywords;
-
+	@ApiModelProperty(value="资讯类型 0佛门动态 1政策法规 2佛学入门 3 法会信息")
     private Integer newsType;
-
+	@ApiModelProperty(value="资讯封面图片路径，图片先上传获取图片路径")
     private String newsImg;
-
+	@ApiModelProperty(value="资讯排序")
     private Integer newsSort;
-
+	@ApiModelProperty(value="资讯状态 0启用 1禁用")
     private Integer newsStatus;
-
+	@ApiModelProperty(value="资讯首页推荐 0推荐到首页 1不推荐 默认不推荐",example="1")
     private Integer newsRecommend;
-
+	@ApiModelProperty(value="资讯所属寺庙id",example="1")
     private Integer newsTempleid;
-
+	@ApiModelProperty(value="资讯创建时间")
     private Date createTime;
-
+	@ApiModelProperty(value="资讯来源",example="原创")
     private String newsSource;
-
+	@ApiModelProperty(value="资讯内容")
     private String newsContent;
 
     public Integer getId() {

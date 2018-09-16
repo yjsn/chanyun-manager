@@ -114,4 +114,36 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectIndexBanner" resultMap="BaseResultMap">
+  	select  
+  	<include refid="Base_Column_List" />
+  	from tb_index_banner where `status`=0 order by sort ASC,create_time desc LIMIT 4;
+  </select>
+  
+  <select id="selectIndexBannerByPage" parameterType="com.chanyun.entity.IndexBanner" resultMap="BaseResultMap">
+  	select  
+  	<include refid="Base_Column_List" />
+  	from 
+  	<trim prefix="where" prefixOverrides="and">
+  	  <if test="imgUrl != null">
+        and img_url = #{imgUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="imgDescription != null">
+        and img_description = #{imgDescription,jdbcType=VARCHAR}
+      </if>
+      <if test="imgLink != null">
+        and img_link = #{imgLink,jdbcType=VARCHAR}
+      </if>
+      <if test="sort != null">
+        and sort = #{sort,jdbcType=INTEGER}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+  	</trim>
+  </select>
 </mapper>
