@@ -16,7 +16,9 @@ public class Menu {
 	@ApiModelProperty(value="菜单url")
     private String url;
 	@ApiModelProperty(value="父级id -1为一级菜单")
-    private Integer pId;
+    private Integer parentId;
+	@ApiModelProperty(value="排序",example="1")
+	private int sort;
 
     public Integer getId() {
         return id;
@@ -58,11 +60,22 @@ public class Menu {
         this.url = url == null ? null : url.trim();
     }
 
-    public Integer getpId() {
-        return pId;
-    }
 
-    public void setpId(Integer pId) {
-        this.pId = pId;
-    }
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+    
+    
 }

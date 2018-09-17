@@ -18,6 +18,7 @@
 package com.chanyun.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.chanyun.common.PageInfo;
 import com.chanyun.entity.Menu;
@@ -80,4 +81,14 @@ public interface MenuService {
 	 * @return
 	 */
 	public boolean editMenu(Menu menu);
+	
+	/**
+	 * 
+	 * @Title: queryParentMenuList   
+	 * @Description: 查询父级菜单列表  
+	 * @param: @return      
+	 * @return: List<Menu>      
+	 * @throws
+	 */
+	public List<Menu> queryParentMenuList();
 }

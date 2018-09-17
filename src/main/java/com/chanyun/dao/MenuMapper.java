@@ -1,6 +1,7 @@
 package com.chanyun.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.chanyun.entity.Menu;
 import com.github.pagehelper.Page;
@@ -34,4 +35,15 @@ public interface MenuMapper {
      * @return
      */
     Page<Menu> selectMenuByPage(Menu menu);
+    
+    /**
+     * 
+     * @Title: selectMenuByparams   
+     * @Description: 根据条件查询菜单列表  
+     * @param: @param params
+     * @param: @return      
+     * @return: List<Menu>      
+     * @throws
+     */
+    List<Menu> selectMenuByparams(Map<String, Object> params);
 }

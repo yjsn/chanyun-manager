@@ -17,7 +17,9 @@
 */ 
 package com.chanyun.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +89,17 @@ public class MenuServiceImpl implements MenuService {
 		int i = menuMapper.updateByPrimaryKeySelective(menu);
 		if(i >0 ) return true;
 		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.chanyun.service.MenuService#queryParentMenuList()
+	 */
+	@Override
+	public List<Menu> queryParentMenuList() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("parentId", -1);
+		List<Menu> result = menuMapper.selectMenuByparams(params);
+		return result;
 	}
 
 }

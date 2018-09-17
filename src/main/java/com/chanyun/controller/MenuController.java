@@ -1,5 +1,7 @@
 package com.chanyun.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -73,5 +75,13 @@ public class MenuController extends BaseController{
 		boolean flag = menuService.editMenu(menu);
 		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改菜单成功", null);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "修改菜单失败，请重试", null);
+	}
+	
+	@ApiOperation("获取父级菜单列表")
+	@PostMapping("/parentList")
+	@ResponseBody
+	public BaseResult<List<Menu>> queryParentMenuList(){
+		List<Menu> result = menuService.queryParentMenuList();
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功", result);
 	}
 }

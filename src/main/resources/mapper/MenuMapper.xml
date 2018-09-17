@@ -7,10 +7,11 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="p_id" jdbcType="INTEGER" property="parentId" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, icon, name, state, url, p_id
+    id, icon, name, state, url, p_id,sort
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,9 +25,9 @@
   </delete>
   <insert id="insert" parameterType="com.chanyun.entity.Menu">
     insert into tb_menu (id, icon, name, 
-      state, url, p_id)
+      state, url, p_id,sort)
     values (#{id,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{pId,jdbcType=INTEGER})
+      #{state,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},#{sort,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.chanyun.entity.Menu">
     insert into tb_menu
@@ -46,8 +47,11 @@
       <if test="url != null">
         url,
       </if>
-      <if test="pId != null">
+      <if test="parentId != null">
         p_id,
+      </if>
+      <if test="sort != null">
+        sort,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -66,8 +70,11 @@
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
       </if>
-      <if test="pId != null">
-        #{pId,jdbcType=INTEGER},
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -86,8 +93,11 @@
       <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
       </if>
-      <if test="pId != null">
-        p_id = #{pId,jdbcType=INTEGER},
+      <if test="parentId != null">
+        p_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        p_id = #{sort,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -98,7 +108,8 @@
       name = #{name,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       url = #{url,jdbcType=VARCHAR},
-      p_id = #{pId,jdbcType=INTEGER}
+      p_id = #{parentId,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   
@@ -112,9 +123,9 @@
   </select>
   
   <select id="selectMenuByPage" parameterType="com.chanyun.entity.Menu" resultMap="BaseResultMap">
-  	select 
-    <include refid="Base_Column_List" />
-    from tb_menu
+	  	select 
+	    <include refid="Base_Column_List" />
+	    from tb_menu
     <trim prefix="where" prefixOverrides="and">
       <if test="icon != null">
         and icon = #{icon,jdbcType=VARCHAR}
@@ -128,8 +139,31 @@
       <if test="url != null">
         and url = #{url,jdbcType=VARCHAR}
       </if>
-      <if test="pId != null">
-        and p_id = #{pId,jdbcType=INTEGER}
+      <if test="parentId != null">
+        and p_id = #{parentId,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </select>
+  
+  <select id="selectMenuByparams" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select 
+	    <include refid="Base_Column_List" />
+	    from tb_menu
+    <trim prefix="where" prefixOverrides="and">
+      <if test="icon != null">
+        and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="state != null">
+        and state = #{state,jdbcType=INTEGER}
+      </if>
+      <if test="url != null">
+        and url = #{url,jdbcType=VARCHAR}
+      </if>
+      <if test="parentId != null">
+        and p_id = #{parentId,jdbcType=INTEGER}
       </if>
     </trim>
   </select>
