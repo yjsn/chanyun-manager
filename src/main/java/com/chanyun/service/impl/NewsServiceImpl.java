@@ -33,10 +33,10 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public boolean add(News news) {
+	public News add(News news) {
 		int i=mapper.insertSelective(news);
-		if(i>0) return true;
-		return false;
+		if(i>0) return news;
+		return null;
 	}
 
 	@Override

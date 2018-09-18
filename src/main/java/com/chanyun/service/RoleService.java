@@ -43,7 +43,7 @@ public interface RoleService {
 	 * @param role
 	 * @return
 	 */
-	public boolean addRole(Role role);
+	public Role addRole(Role role);
 	
 	/**
 	 * 修改role数据

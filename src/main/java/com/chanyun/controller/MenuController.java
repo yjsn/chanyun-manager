@@ -63,9 +63,9 @@ public class MenuController extends BaseController{
 	@PostMapping("/add")
 	@ResponseBody
 	public BaseResult<String> addMenu(@RequestBody Menu menu){
-		boolean flag = menuService.addMenu(menu);
-		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "新增菜单成功", null);
-		return returnBaseResult(Constants.RESULT_CODE_FAIL, "新增菜单失败，请重试", null);
+		Menu result = menuService.addMenu(menu);
+		if(null != result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "新增菜单成功", result);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "新增菜单失败，请重试", result);
 	}
 	
 	@ApiOperation("修改菜单")
@@ -73,7 +73,7 @@ public class MenuController extends BaseController{
 	@ResponseBody
 	public BaseResult<String> editMenu(@RequestBody Menu menu){
 		boolean flag = menuService.editMenu(menu);
-		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改菜单成功", null);
+		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改菜单成功", menu);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "修改菜单失败，请重试", null);
 	}
 	

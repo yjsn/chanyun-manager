@@ -5,11 +5,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
 
@@ -111,9 +117,22 @@ public class UploadUtil {
 	}
 	
 	/**
+	 * aliyun oss服务文件上传
+	 * @param request
+	 * @param savePath
+	 * @return
+	 */
+	public BaseResult<String> OssUploadFile(HttpServletRequest request,String savePath){
+		
+		
+		return new BaseResult<String>(Constants.RESULT_CODE_SUCCESS,"文件上传成功","");
+	}
+	
+	
+	/**
 	 * 
 	 * @Title: getFileNameByTime   
-	 * @Description: TODO(根据时间生成文件名称)   
+	 * @Description: 根据时间生成文件名称
 	 * @param: @param fileName 原有文件名
 	 * @param: @return      
 	 * @return: String    返回新生成文件名  
@@ -121,7 +140,25 @@ public class UploadUtil {
 	 */
 	public static String getFileNameByTime(String fileName){
 		String suffix = fileName.substring(fileName.lastIndexOf("."));
-		return DateUtil.getCurrentTimeMillis()+suffix;
+		String result = DateUtil.DateToString(new Date(), DateStyle.YYYYMMDDHHMMSS)+getRandomString(4)+suffix;
+		return result;
 	}
+	
+	/**
+	 * length用户要求产生字符串的长度
+	 * @param length
+	 * @return
+	 */
+	public static String getRandomString(int length){
+//	     String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		 String str="0123456789";
+	     Random random=new Random();
+	     StringBuffer sb=new StringBuffer();
+	     for(int i=0;i<length;i++){
+	       int number=random.nextInt(10);
+	       sb.append(str.charAt(number));
+	     }
+	     return sb.toString();
+	 }
 	
 }

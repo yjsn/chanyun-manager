@@ -73,7 +73,7 @@ public interface MenuService {
 	 * @param menu
 	 * @return
 	 */
-	public boolean addMenu(Menu menu);
+	public Menu addMenu(Menu menu);
 	
 	/**
 	 * 更新菜单数据

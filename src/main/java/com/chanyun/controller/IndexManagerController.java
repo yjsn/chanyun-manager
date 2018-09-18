@@ -22,7 +22,7 @@ import com.chanyun.service.NewsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(value="首面管理接口",tags="首面管理接口")
+@Api(value="首页管理接口",tags="首页管理接口")
 @RestController
 @RequestMapping("/api/indexManager")
 public class IndexManagerController extends BaseController<Object>{
@@ -87,9 +87,9 @@ public class IndexManagerController extends BaseController<Object>{
 	@PostMapping("/addBannerInfo")
 	@ResponseBody
 	public BaseResult<IndexBanner> addBannerInfo(@RequestBody IndexBanner request){
-		boolean result = bannerService.add(request);
-		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息添加成功", null);
-		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息添加失败", null);
+		IndexBanner result = bannerService.add(request);
+		if(null==result) return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息添加失败", result);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息添加成功", result);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -98,7 +98,7 @@ public class IndexManagerController extends BaseController<Object>{
 	@ResponseBody
 	public BaseResult<IndexBanner> editBannerInfo(@RequestBody IndexBanner request){
 		boolean result = bannerService.edit(request);
-		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息修改成功", null);
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息修改成功", request);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息修改失败", null);
 	}
 	
@@ -126,9 +126,9 @@ public class IndexManagerController extends BaseController<Object>{
 	@PostMapping("/addNewsInfo")
 	@ResponseBody
 	public BaseResult<News> addNewsInfo(@RequestBody News news){
-		boolean result = newsService.add(news);
-		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息添加成功", null);
-		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息添加失败", null);
+		News result = newsService.add(news);
+		if(result!=null) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息添加成功", result);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息添加失败", result);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -137,7 +137,7 @@ public class IndexManagerController extends BaseController<Object>{
 	@ResponseBody
 	public BaseResult<News> editNewsInfo(@RequestBody News news){
 		boolean result = newsService.edit(news);
-		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息修改成功", null);
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息修改成功", news);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息修改失败", null);
 	}
 }

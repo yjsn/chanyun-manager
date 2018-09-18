@@ -24,7 +24,7 @@
     delete from tb_merchant_account
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chanyun.entity.MerchantAccount">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.chanyun.entity.MerchantAccount">
     insert into tb_merchant_account (id, account_number, account_password, 
       account_name, temple_id, status, 
       remark, create_time)
@@ -32,7 +32,7 @@
       #{accountName,jdbcType=VARCHAR}, #{templeId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.chanyun.entity.MerchantAccount">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.chanyun.entity.MerchantAccount">
     insert into tb_merchant_account
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

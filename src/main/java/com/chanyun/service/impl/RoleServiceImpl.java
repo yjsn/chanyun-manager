@@ -31,10 +31,10 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public boolean addRole(Role role) {
+	public Role addRole(Role role) {
 		int i = roleMapper.insertSelective(role);
-		if(i>0) return true;
-		return false;
+		if(i>0) return role;
+		return null;
 	}
 
 	@Override

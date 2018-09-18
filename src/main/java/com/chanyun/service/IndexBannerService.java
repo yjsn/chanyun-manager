@@ -42,7 +42,7 @@ public interface IndexBannerService {
 	 * @param indexBanner 
 	 * @return
 	 */
-	public boolean add(IndexBanner indexBanner);
+	public IndexBanner add(IndexBanner indexBanner);
 	
 	/**
 	 * 修改首页banner数据

@@ -42,7 +42,7 @@
     delete from tb_merits
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chanyun.entity.Merits">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.chanyun.entity.Merits">
     insert into tb_merits (id, merits_number, user_id, 
       customer_name, customer_year, customer_month, 
       customer_day, customer_hour, customer_address_province, 
@@ -62,7 +62,7 @@
       #{completionTime,jdbcType=TIMESTAMP}, #{var1,jdbcType=VARCHAR}, #{var2,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.chanyun.entity.Merits">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.chanyun.entity.Merits">
     insert into tb_merits
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

@@ -24,10 +24,10 @@ public class IndexBannerServiceImpl implements IndexBannerService {
 	}
 
 	@Override
-	public boolean add(IndexBanner indexBanner) {
+	public IndexBanner add(IndexBanner indexBanner) {
 		int i = mapper.insertSelective(indexBanner);
-		if(i>0) return true;
-		return false;
+		if(i>0) return indexBanner;
+		return null;
 	}
 
 	@Override

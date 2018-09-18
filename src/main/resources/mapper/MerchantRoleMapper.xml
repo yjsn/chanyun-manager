@@ -19,13 +19,13 @@
     delete from tb_merchant_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chanyun.entity.MerchantRole">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.chanyun.entity.MerchantRole">
     insert into tb_merchant_role (id, role_id, merchant_id
       )
     values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{merchantId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.chanyun.entity.MerchantRole">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.chanyun.entity.MerchantRole">
     insert into tb_merchant_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

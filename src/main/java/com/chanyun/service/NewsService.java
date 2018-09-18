@@ -39,7 +39,7 @@ public interface NewsService {
 	 * @param News 
 	 * @return
 	 */
-	public boolean add(News news);
+	public News add(News news);
 	
 	/**
 	 * 修改资讯数据

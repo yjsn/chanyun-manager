@@ -22,7 +22,7 @@ public interface MerchantService {
 	 * @param account
 	 * @return
 	 */
-	public boolean addMerchantAccount(MerchantAccount account);
+	public MerchantAccount addMerchantAccount(MerchantAccount account);
 	
 	/**
 	 * 查询商户数据是否存在

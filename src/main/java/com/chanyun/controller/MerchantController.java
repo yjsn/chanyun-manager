@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
 import com.chanyun.common.PageInfo;
@@ -62,16 +64,16 @@ public class MerchantController extends BaseController<Object>{
 	@PostMapping("/add")
 	@ApiOperation(value="添加商户接口")
 	@ResponseBody
-	public BaseResult add(@RequestBody MerchantAccount account){
+	public BaseResult<MerchantAccount> add(@RequestBody MerchantAccount account){
 		Map<String, Object> queryParams = new HashMap<String, Object>();
 		queryParams.put("accountNumber", account.getAccountNumber());
 		boolean isExist=merchantService.selectMerchantAccountIsSave(queryParams);
 		if(isExist) return returnBaseResult(Constants.RESULT_CODE_FAIL, "用户名已经存在，请重新输入用户名称",null);
 		//设置注册时间
 		account.setCreateTime(new Date());
-		boolean reslut = merchantService.addMerchantAccount(account);
-		if(reslut)
-			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "注册成功",null);
+		MerchantAccount result = merchantService.addMerchantAccount(account);
+		if(null != result)
+			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "注册成功",result);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "注册失败",null);
 	}
 	
@@ -142,6 +144,7 @@ public class MerchantController extends BaseController<Object>{
 	}
 	
 	@SuppressWarnings("unchecked")
+	@ApiIgnore
 	@ApiOperation(value="用户登陆测试接口")
 	@PostMapping("/loginTest")
 	@ResponseBody

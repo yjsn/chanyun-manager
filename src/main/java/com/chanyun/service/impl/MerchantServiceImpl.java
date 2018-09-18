@@ -42,11 +42,11 @@ public class MerchantServiceImpl implements MerchantService{
 	}
 
 	@Override
-	public boolean addMerchantAccount(MerchantAccount account) {
-		int i = accountMapper.insert(account);
+	public MerchantAccount addMerchantAccount(MerchantAccount account) {
+		int i = accountMapper.insertSelective(account);
 		if(i>0)
-			return true;
-		return false;
+			return account;
+		return null;
 	}
 	
 	@Override

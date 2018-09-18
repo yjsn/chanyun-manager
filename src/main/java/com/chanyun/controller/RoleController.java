@@ -36,8 +36,8 @@ public class RoleController extends BaseController<Object>{
 	@PostMapping("add")
 	@ResponseBody
 	public BaseResult<PageInfo<Role>> add(@RequestBody Role request){
-		boolean flag = roleService.addRole(request);
-		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "添加角色成功", null);
+		Role result = roleService.addRole(request);
+		if(null != result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "添加角色成功", result);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加角色失败，请重试", null);
 	}
 	
@@ -56,7 +56,7 @@ public class RoleController extends BaseController<Object>{
 	@ResponseBody
 	public BaseResult<PageInfo<Role>> edit(@RequestBody Role request){
 		boolean flag = roleService.editRole(request);
-		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改角色成功", null);
+		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改角色成功", request);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "修改角色失败，请重试", null);
 	}
 }

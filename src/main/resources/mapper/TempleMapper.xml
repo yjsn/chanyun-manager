@@ -28,7 +28,7 @@
     delete from tb_temple
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chanyun.entity.Temple">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.chanyun.entity.Temple">
     insert into tb_temple (id, temple_number, temple_name, 
       temple_province, temple_city, temple_county, 
       temple_address, status, temple_contact_name, 
@@ -38,7 +38,7 @@
       #{templeAddress,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{templeContactName,jdbcType=VARCHAR}, 
       #{templeContactTel,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.chanyun.entity.Temple">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.chanyun.entity.Temple">
     insert into tb_temple
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

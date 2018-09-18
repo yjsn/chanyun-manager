@@ -78,10 +78,10 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public boolean addMenu(Menu menu) {
+	public Menu addMenu(Menu menu) {
 		int i = menuMapper.insert(menu);
-		if(i >0 ) return true;
-		return false;
+		if(i >0 ) return menu;
+		return null;
 	}
 
 	@Override
