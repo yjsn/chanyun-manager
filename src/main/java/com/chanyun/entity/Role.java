@@ -8,7 +8,7 @@ public class Role {
 	@ApiModelProperty(value="角色id",readOnly=true,required=true)
     private Integer id;
 	
-	@ApiModelProperty("状态 0 启用 1禁用")
+	@ApiModelProperty("状态  1启用 2禁用  99删除")
     private int status;
 	@ApiModelProperty("角色名称")
     private String name;

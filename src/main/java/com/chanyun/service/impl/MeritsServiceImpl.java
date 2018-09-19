@@ -17,6 +17,7 @@ public class MeritsServiceImpl implements MeritsService{
 	@Override
 	public PageInfo<Merits> findByPage(int pageNum, int pageSize,Merits merits) {
 		PageHelper.startPage(pageNum,pageSize);
+		PageHelper.orderBy("apply_time desc");
 		Page<Merits> sqlResult = meritsMapper.selectByPage(merits);
 		PageInfo<Merits> result = new PageInfo<Merits>(sqlResult);
 		return result;

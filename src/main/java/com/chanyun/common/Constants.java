@@ -41,4 +41,21 @@ public class Constants {
 	 * 未登陆
 	 */
 	public final static String RESULT_CODE_LOGIN_OUT="0009";
+	
+	/**
+	 * 禁用状态值
+	 */
+	public final static int STATUS_DISABLE=2;
+	
+	/**
+	 * 启用状态值
+	 */
+	public final static int STATUS_ABLE=1;
+	
+	/**
+	 * 删除状态值
+	 */
+	public final static int STATUS_DELETE=99;
+	
+	
 }

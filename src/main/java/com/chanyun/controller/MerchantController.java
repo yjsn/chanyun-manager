@@ -143,6 +143,15 @@ public class MerchantController extends BaseController<Object>{
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",result);
 	}
 	
+	@ApiOperation("退出登陆接口")
+	@PostMapping("loginOut")
+	@ResponseBody
+	public BaseResult<String> loginOut(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.setAttribute("merchantAccount", null);
+		return  returnBaseResult(Constants.RESULT_CODE_SUCCESS, "用户已经退出登陆",null);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@ApiIgnore
 	@ApiOperation(value="用户登陆测试接口")

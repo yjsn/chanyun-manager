@@ -11,7 +11,7 @@ public class Menu {
     private String icon;
 	@ApiModelProperty(value="菜单名称")
     private String name;
-	@ApiModelProperty(value="菜单状态")
+	@ApiModelProperty(value="菜单状态   1启用 2禁用  99删除")
     private Integer state;
 	@ApiModelProperty(value="菜单url")
     private String url;

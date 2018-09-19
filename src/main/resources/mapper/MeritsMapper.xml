@@ -311,58 +311,58 @@
     <include refid="Base_Column_List" />
     from tb_merits
     <trim prefix="where" prefixOverrides="and">
-      <if test="meritsNumber != null">
+      <if test="meritsNumber != null and meritsNumber !=''">
         and merits_number = #{meritsNumber,jdbcType=VARCHAR}
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId !=''">
         and user_id = #{userId,jdbcType=INTEGER}
       </if>
-      <if test="customerName != null">
+      <if test="customerName != null and customerName !=''">
         and customer_name = #{customerName,jdbcType=VARCHAR}
       </if>
-      <if test="customerYear != null">
+      <if test="customerYear != null and customerYear !=''">
         and customer_year = #{customerYear,jdbcType=INTEGER}
       </if>
-      <if test="customerMonth != null">
+      <if test="customerMonth != null and customerMonth !=''">
         and customer_month = #{customerMonth,jdbcType=INTEGER}
       </if>
-      <if test="customerDay != null">
+      <if test="customerDay != null and customerDay !=''">
         and customer_day = #{customerDay,jdbcType=INTEGER}
       </if>
-      <if test="customerHour != null">
+      <if test="customerHour != null and customerHour !=''">
         and customer_hour = #{customerHour,jdbcType=VARCHAR}
       </if>
-      <if test="customerAddressProvince != null">
+      <if test="customerAddressProvince != null and customerAddressProvince !=''">
         and customer_address_province = #{customerAddressProvince,jdbcType=VARCHAR}
       </if>
-      <if test="customerAddressCity != null">
+      <if test="customerAddressCity != null and customerAddressCity !=''">
         and customer_address_city = #{customerAddressCity,jdbcType=VARCHAR}
       </if>
-      <if test="customerAddressArea != null">
+      <if test="customerAddressArea != null and customerAddressArea !=''">
         and customer_address_area = #{customerAddressArea,jdbcType=VARCHAR}
       </if>
-      <if test="customerAddress != null">
+      <if test="customerAddress != null and customerAddress !=''">
         and customer_address = #{customerAddress,jdbcType=VARCHAR}
       </if>
-      <if test="meritsType != null">
+      <if test="meritsType != null and meritsType !=''">
         and merits_type = #{meritsType,jdbcType=INTEGER}
       </if>
-      <if test="meritsName != null">
+      <if test="meritsName != null and meritsName !=''">
         and merits_name = #{meritsName,jdbcType=VARCHAR}
       </if>
-      <if test="meritsAccount != null">
+      <if test="meritsAccount != null and meritsAccount !=''">
         and merits_account = #{meritsAccount,jdbcType=INTEGER}
       </if>
-      <if test="templeId != null">
+      <if test="templeId != null and templeId !=''">
         and temple_id = #{templeId,jdbcType=INTEGER}
       </if>
-      <if test="godName != null">
+      <if test="godName != null and godName !=''">
         and god_name = #{godName,jdbcType=VARCHAR}
       </if>
-      <if test="templeHouseName != null">
+      <if test="templeHouseName != null and templeHouseName !=''">
         and temple_house_name = #{templeHouseName,jdbcType=VARCHAR}
       </if>
-      <if test="meritsStatus != null">
+      <if test="meritsStatus != null and meritsStatus !=''">
         and merits_status = #{meritsStatus,jdbcType=INTEGER}
       </if>
       <if test="applyTime != null">
@@ -371,10 +371,10 @@
       <if test="completionTime != null">
         and completion_time = #{completionTime,jdbcType=TIMESTAMP}
       </if>
-      <if test="var1 != null">
+      <if test="var1 != null and var1 !=''">
         and var1 = #{var1,jdbcType=VARCHAR}
       </if>
-      <if test="var2 != null">
+      <if test="var2 != null and var2 !=''">
         and var2 = #{var2,jdbcType=VARCHAR}
       </if>
     </trim>

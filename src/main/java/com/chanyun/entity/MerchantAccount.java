@@ -17,7 +17,7 @@ public class MerchantAccount {
     private String accountName;
 	@ApiModelProperty(value="所属寺庙Id")
     private Integer templeId;
-	@ApiModelProperty(value="状态 0 启用 1禁用")
+	@ApiModelProperty(value="状态  1启用 2禁用  99删除")
     private Integer status;
 	@ApiModelProperty(value="备注")
     private String remark;
