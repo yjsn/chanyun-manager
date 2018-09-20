@@ -22,7 +22,7 @@ public class TempleIntroduceServiceImpl implements TempleIntroduceService{
 
 	@Override
 	public boolean edit(TempleIntroduce templeIntroduce) {
-		int i = mapper.insertSelective(templeIntroduce);
+		int i = mapper.updateByPrimaryKeySelective(templeIntroduce);
 		if(i>0) return true;
 		return false;
 	}
