@@ -58,13 +58,13 @@
       <if test="templeMonkDesciption != null and templeMonkDesciption != ''">
         temple_monk_desciption,
       </if>
-      <if test="sort != null and sort != ''">
+      <if test="sort != null">
         sort,
       </if>
       <if test="templeMonkCoverImg != null and templeMonkCoverImg != ''">
         temple_monk_cover_img,
       </if>
-      <if test="status != null and">
+      <if test="status != null ">
         status,
       </if>
       <if test="createTime != null">
@@ -159,6 +159,41 @@
   </update>
   
   <select id="selectByParams" parameterType="com.chanyun.entity.TempleMonk" resultMap="ResultMapWithBLOBs">
+  		select
+  		  <include refid="Base_Column_List" />
+    		,
+    		<include refid="Blob_Column_List" /> 
+    		from tb_temple_monk where status = 1
+    		<trim prefixOverrides="and">
+    			<if test="templeId != null and templeId != ''">
+			        and temple_id = #{templeId,jdbcType=INTEGER}
+			      </if>
+			      <if test="templeMonkName != null  and templeMonkName != ''">
+			        and temple_monk_name = #{templeMonkName,jdbcType=VARCHAR}
+			      </if>
+			      <if test="templeMonkDesciption != null  and templeMonkDesciption != ''">
+			        and temple_monk_desciption = #{templeMonkDesciption,jdbcType=VARCHAR}
+			      </if>
+			      <if test="sort != null  and sort != ''">
+			        and sort = #{sort,jdbcType=INTEGER}
+			      </if>
+			      <if test="templeMonkCoverImg != null  and templeMonkCoverImg != ''">
+			        and temple_monk_cover_img = #{templeMonkCoverImg,jdbcType=VARCHAR}
+			      </if>
+			      <if test="status != null">
+			        and status = #{status,jdbcType=INTEGER}
+			      </if>
+			      <if test="createTime != null">
+			        and create_time = #{createTime,jdbcType=TIMESTAMP}
+			      </if>
+			      <if test="templeMonkIntroduce != null  and templeMonkIntroduce != ''">
+			        and temple_monk_introduce = #{templeMonkIntroduce,jdbcType=LONGVARCHAR}
+			      </if>
+    		</trim>
+    		order by sort asc,create_time desc limit 3
+  </select>
+  
+  <select id="selectByPage" parameterType="com.chanyun.entity.TempleMonk" resultMap="ResultMapWithBLOBs">
   		select
   		  <include refid="Base_Column_List" />
     		,

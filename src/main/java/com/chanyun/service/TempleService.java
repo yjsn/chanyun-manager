@@ -42,5 +42,12 @@ public interface TempleService {
 	 */
 	public Temple addTemple(Temple temple);
 	
+	/**
+	 * 根据id查询寺庙信息
+	 * @param templeId
+	 * @return
+	 */
+	public Temple queryById(int templeId);
+	
 	
 }

@@ -3,6 +3,7 @@ package com.chanyun.dao;
 import java.util.List;
 
 import com.chanyun.entity.TempleMonk;
+import com.github.pagehelper.Page;
 
 public interface TempleMonkMapper {
     int deleteByPrimaryKey(Integer id);
@@ -25,4 +26,11 @@ public interface TempleMonkMapper {
      * @return
      */
     List<TempleMonk> selectByParams(TempleMonk templeMonk);
+    
+    /**
+     * 分页查询寺庙僧人列表
+     * @param templeMonk
+     * @return
+     */
+    Page<TempleMonk> selectByPage(TempleMonk templeMonk);
 }

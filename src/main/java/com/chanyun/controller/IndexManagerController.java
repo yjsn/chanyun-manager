@@ -3,6 +3,9 @@ package com.chanyun.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,7 @@ import com.chanyun.common.Constants;
 import com.chanyun.common.PageInfo;
 import com.chanyun.common.QueryParams;
 import com.chanyun.entity.IndexBanner;
+import com.chanyun.entity.MerchantAccount;
 import com.chanyun.entity.News;
 import com.chanyun.service.IndexBannerService;
 import com.chanyun.service.NewsService;
@@ -125,7 +129,10 @@ public class IndexManagerController extends BaseController<Object>{
 	@ApiOperation("添加资讯信息")
 	@PostMapping("/addNewsInfo")
 	@ResponseBody
-	public BaseResult<News> addNewsInfo(@RequestBody News news){
+	public BaseResult<News> addNewsInfo(@RequestBody News news,HttpServletRequest request){
+		HttpSession session = request.getSession();
+		MerchantAccount account = (MerchantAccount) session.getAttribute("merchantAccount");
+		news.setNewsTempleid(account.getTempleId());
 		News result = newsService.add(news);
 		if(result!=null) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息添加成功", result);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息添加失败", result);

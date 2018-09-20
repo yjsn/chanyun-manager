@@ -68,7 +68,7 @@
         #{accountNumber,jdbcType=VARCHAR},
       </if>
       <if test="accountPassword != null">
-        #{accountPassword,jdbcType=VARCHAR},
+        md5(#{accountPassword,jdbcType=VARCHAR}),
       </if>
       <if test="accountName != null">
         #{accountName,jdbcType=VARCHAR},

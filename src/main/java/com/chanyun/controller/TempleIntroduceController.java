@@ -1,5 +1,8 @@
 package com.chanyun.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
+import com.chanyun.entity.MerchantAccount;
 import com.chanyun.entity.TempleIntroduce;
 import com.chanyun.service.TempleIntroduceService;
 
@@ -32,6 +36,20 @@ public class TempleIntroduceController extends BaseController<Object> {
 			return returnBaseResult(Constants.RESULT_CODE_SUCCESS,"查询成功", result);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL,"查询失败", null);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value="根据寺庙Id查询寺庙简介信息")
+	@PostMapping("/queryTempleIntroduce")
+	@ResponseBody
+	public BaseResult<TempleIntroduce> queryTempleIntroduce(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		MerchantAccount account = (MerchantAccount) session.getAttribute("merchantAccount");
+		TempleIntroduce result = templeIntroduceService.queryTempleIntroduceByTempleId(account.getTempleId());
+		if(null != result.getId())
+			return returnBaseResult(Constants.RESULT_CODE_SUCCESS,"查询成功", result);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL,"查询失败", null);
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	@ApiOperation("编辑寺庙简介")

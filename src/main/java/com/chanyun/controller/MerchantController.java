@@ -26,8 +26,12 @@ import com.chanyun.common.PageInfo;
 import com.chanyun.common.QueryParams;
 import com.chanyun.entity.Menu;
 import com.chanyun.entity.MerchantAccount;
+import com.chanyun.entity.Temple;
+import com.chanyun.entity.TempleIntroduce;
 import com.chanyun.service.MenuService;
 import com.chanyun.service.MerchantService;
+import com.chanyun.service.TempleIntroduceService;
+import com.chanyun.service.TempleService;
 import com.github.pagehelper.Page;
 
 /**
@@ -54,6 +58,10 @@ public class MerchantController extends BaseController<Object>{
 	private MerchantService merchantService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private TempleIntroduceService templeIntroduceService;
+	@Autowired
+	private TempleService templeService;
 	
 	/**
 	 * 添加商户
@@ -64,7 +72,7 @@ public class MerchantController extends BaseController<Object>{
 	@PostMapping("/add")
 	@ApiOperation(value="添加商户接口")
 	@ResponseBody
-	public BaseResult<MerchantAccount> add(@RequestBody MerchantAccount account){
+	public BaseResult<MerchantAccount> add(@RequestBody MerchantAccount account,HttpServletRequest request){
 		Map<String, Object> queryParams = new HashMap<String, Object>();
 		queryParams.put("accountNumber", account.getAccountNumber());
 		boolean isExist=merchantService.selectMerchantAccountIsSave(queryParams);
@@ -72,8 +80,13 @@ public class MerchantController extends BaseController<Object>{
 		//设置注册时间
 		account.setCreateTime(new Date());
 		MerchantAccount result = merchantService.addMerchantAccount(account);
-		if(null != result)
+		if(null != result){//注册成功添加寺庙简介
+			TempleIntroduce templeIntroduce = new TempleIntroduce();
+			Temple temple = templeService.queryById(account.getTempleId());
+			templeIntroduce.setTempleId(temple.getId());
+			templeIntroduce.setTempleName(temple.getTempleName());
 			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "注册成功",result);
+		}
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "注册失败",null);
 	}
 	
@@ -124,7 +137,7 @@ public class MerchantController extends BaseController<Object>{
 			return returnBaseResult(Constants.RESULT_CODE_FAIL, "账号已经被封禁，请联系网站管理员！",null);
 		}
 		session.setAttribute("merchantAccount", result);
-		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",result);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",null);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -178,7 +191,7 @@ public class MerchantController extends BaseController<Object>{
 			return returnBaseResult(Constants.RESULT_CODE_FAIL, "账号已经被封禁，请联系网站管理员！",null);
 		}
 		session.setAttribute("merchantAccount", result);
-		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",result);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",null);
 	}
 	
 	

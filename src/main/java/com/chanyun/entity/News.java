@@ -15,7 +15,7 @@ public class News {
     private String newsDescription;
 	@ApiModelProperty(value="资讯关键字")
     private String newsKeywords;
-	@ApiModelProperty(value="资讯类型 0佛门动态 1政策法规 2佛学入门 3 法会信息")
+	@ApiModelProperty(value="资讯类型 0佛门动态 1政策法规 2佛学入门 3 法会信息 4募捐 5 活动")
     private Integer newsType;
 	@ApiModelProperty(value="资讯封面图片路径，图片先上传获取图片路径")
     private String newsImg;
@@ -25,7 +25,7 @@ public class News {
     private Integer newsStatus;
 	@ApiModelProperty(value="资讯首页推荐 0推荐到首页 1不推荐 默认不推荐",example="1")
     private Integer newsRecommend;
-	@ApiModelProperty(value="资讯所属寺庙id",example="1")
+	@ApiModelProperty(value="资讯所属寺庙id",example="1",hidden=true)
     private Integer newsTempleid;
 	@ApiModelProperty(value="资讯创建时间")
     private Date createTime;

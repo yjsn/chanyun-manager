@@ -39,4 +39,10 @@ public class TempleServiceImpl implements TempleService {
 		return null;
 	}
 
+	@Override
+	public Temple queryById(int templeId) {
+		Temple result = mapper.selectByPrimaryKey(templeId);
+		return result;
+	}
+
 }

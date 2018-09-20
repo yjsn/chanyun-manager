@@ -39,6 +39,7 @@ public interface TempleIntroduceService {
 	 */
 	public TempleIntroduce queryTempleIntroduceByTempleId(int templeId);
 	
+	
 	/**
 	 * 根据id查询寺庙简介信息
 	 * @param templeIntroduceId
