@@ -124,8 +124,7 @@
   <select id="selectIndexBannerByPage" parameterType="com.chanyun.entity.IndexBanner" resultMap="BaseResultMap">
   	select  
   	<include refid="Base_Column_List" />
-  	from tb_index_banner  	
-  	<trim prefix="where" prefixOverrides="and">
+  	from tb_index_banner where status !=99
   	  <if test="imgUrl != null">
         and img_url = #{imgUrl,jdbcType=VARCHAR}
       </if>
@@ -144,6 +143,5 @@
       <if test="createTime != null">
         and create_time = #{createTime,jdbcType=TIMESTAMP}
       </if>
-  	</trim>
   </select>
 </mapper>

@@ -17,7 +17,7 @@ public class IndexBanner {
     private String imgLink;
 	@ApiModelProperty(value="banner排序")
     private Integer sort;
-	@ApiModelProperty(value="banner状态 0 启用 1 禁用")
+	@ApiModelProperty(value="banner状态  1启用 2 禁用 99 删除")
     private Integer status;
 	@ApiModelProperty(value="banner 创建时间")
     private Date createTime;

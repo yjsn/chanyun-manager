@@ -96,4 +96,16 @@ public class TempleController extends BaseController<Object> {
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value="寺庙启用/审核通过 接口")
+	@PostMapping("/checkFail")
+	@ResponseBody
+	public BaseResult<Temple> checkFail(@RequestBody int templeId){
+		Temple temple = new Temple();
+		temple.setId(templeId);
+		temple.setStatus(Constants.STATUS_CHECK_FAIL);
+		boolean flag = templeService.editTemple(temple);
+		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", temple);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);
+	}
 }

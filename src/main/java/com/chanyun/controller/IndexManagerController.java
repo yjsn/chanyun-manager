@@ -1,6 +1,7 @@
 package com.chanyun.controller;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +62,7 @@ public class IndexManagerController extends BaseController<Object>{
 	public BaseResult<News> religiousCeremoniesList(){
 		News news = new News();
 		news.setNewsType(3);//法会类型资讯
-		news.setNewsStatus(0);
+		news.setNewsStatus(Constants.STATUS_ABLE);
 		PageInfo<News> list = newsService.queryNewsList(1, 1, news);
 		News result = new News();;
 		if(list.getList().size()>0) result = list.getList().get(0);
@@ -91,6 +92,8 @@ public class IndexManagerController extends BaseController<Object>{
 	@PostMapping("/addBannerInfo")
 	@ResponseBody
 	public BaseResult<IndexBanner> addBannerInfo(@RequestBody IndexBanner request){
+		request.setStatus(Constants.STATUS_ABLE);
+		request.setCreateTime(new Date());
 		IndexBanner result = bannerService.add(request);
 		if(null==result) return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息添加失败", result);
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息添加成功", result);
@@ -106,6 +109,47 @@ public class IndexManagerController extends BaseController<Object>{
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息修改失败", null);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("banner信息启用接口")
+	@PostMapping("/ableBannerInfo")
+	@ResponseBody
+	public BaseResult<IndexBanner> ableBannerInfo(@RequestBody int bannerId){
+		IndexBanner indexBanner =  new IndexBanner();
+		indexBanner.setId(bannerId);
+		indexBanner.setStatus(Constants.STATUS_ABLE);
+		boolean result = bannerService.edit(indexBanner);
+		indexBanner=bannerService.queryIndexBannerById(bannerId);
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息修改成功", indexBanner);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息修改失败", null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("banner信息禁用接口")
+	@PostMapping("/disableBannerInfo")
+	@ResponseBody
+	public BaseResult<IndexBanner> disableBannerInfo(@RequestBody int bannerId){
+		IndexBanner indexBanner =  new IndexBanner();
+		indexBanner.setId(bannerId);
+		indexBanner.setStatus(Constants.STATUS_DISABLE);
+		boolean result = bannerService.edit(indexBanner);
+		indexBanner=bannerService.queryIndexBannerById(bannerId);
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息修改成功", indexBanner);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息修改失败", null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("banner信息删除接口")
+	@PostMapping("/deleteBannerInfo")
+	@ResponseBody
+	public BaseResult<IndexBanner> deleteBannerInfo(@RequestBody int bannerId){
+		IndexBanner indexBanner =  new IndexBanner();
+		indexBanner.setId(bannerId);
+		indexBanner.setStatus(Constants.STATUS_DELETE);
+		boolean result = bannerService.edit(indexBanner);
+		indexBanner=bannerService.queryIndexBannerById(bannerId);
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息删除成功", null);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息删除失败", null);
+	}
 	
 	@SuppressWarnings("unchecked")
 	@ApiOperation("分页查询资讯列表")
@@ -147,4 +191,48 @@ public class IndexManagerController extends BaseController<Object>{
 		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息修改成功", news);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息修改失败", null);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("禁用资讯信息")
+	@PostMapping("/disableNewsInfo")
+	@ResponseBody
+	public BaseResult<News> disableNewsInfo(@RequestBody int newsId){
+		News  news = new News();
+		news.setId(newsId);
+		news.setNewsStatus(Constants.STATUS_DISABLE);
+		boolean result = newsService.edit(news);
+		news = newsService.queryNewsById(newsId);
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息禁用成功", news);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息禁用失败", null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("启用资讯信息")
+	@PostMapping("/ableNewsInfo")
+	@ResponseBody
+	public BaseResult<News> ableNewsInfo(@RequestBody int newsId){
+		News  news = new News();
+		news.setId(newsId);
+		news.setNewsStatus(Constants.STATUS_ABLE);
+		boolean result = newsService.edit(news);
+		news = newsService.queryNewsById(newsId);
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息启用成功", news);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息用户失败", null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("删除资讯信息")
+	@PostMapping("/deleteNewsInfo")
+	@ResponseBody
+	public BaseResult<News> deleteNewsInfo(@RequestBody int newsId){
+		News  news = new News();
+		news.setId(newsId);
+		news.setNewsStatus(Constants.STATUS_DELETE);
+		boolean result = newsService.edit(news);
+		news = newsService.queryNewsById(newsId);
+		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息禁用成功", null);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息禁用失败", null);
+	}
 }
+
+

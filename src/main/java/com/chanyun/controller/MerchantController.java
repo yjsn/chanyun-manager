@@ -85,6 +85,7 @@ public class MerchantController extends BaseController<Object>{
 			Temple temple = templeService.queryById(account.getTempleId());
 			templeIntroduce.setTempleId(temple.getId());
 			templeIntroduce.setTempleName(temple.getTempleName());
+			templeIntroduceService.add(templeIntroduce);
 			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "注册成功",result);
 		}
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "注册失败",null);
@@ -133,7 +134,7 @@ public class MerchantController extends BaseController<Object>{
 		if(null == result){
 			return returnBaseResult(Constants.RESULT_CODE_FAIL, "账号不存在，或密码错误",null);
 		}
-		if(result.getStatus() != 0){
+		if(result.getStatus() != 1){
 			return returnBaseResult(Constants.RESULT_CODE_FAIL, "账号已经被封禁，请联系网站管理员！",null);
 		}
 		session.setAttribute("merchantAccount", result);

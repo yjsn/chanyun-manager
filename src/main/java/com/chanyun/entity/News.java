@@ -21,7 +21,7 @@ public class News {
     private String newsImg;
 	@ApiModelProperty(value="资讯排序")
     private Integer newsSort;
-	@ApiModelProperty(value="资讯状态 0启用 1禁用")
+	@ApiModelProperty(value="资讯状态 1启用 2禁用 99禁用")
     private Integer newsStatus;
 	@ApiModelProperty(value="资讯首页推荐 0推荐到首页 1不推荐 默认不推荐",example="1")
     private Integer newsRecommend;

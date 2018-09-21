@@ -23,6 +23,8 @@ public class MerchantAccount {
     private String remark;
 	@ApiModelProperty(value="创建时间",readOnly=true)
     private Date createTime;
+	@ApiModelProperty(value="寺庙名称",readOnly=true)
+	private String templeName;
 
     public Integer getId() {
         return id;
@@ -87,4 +89,14 @@ public class MerchantAccount {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	public String getTempleName() {
+		return templeName;
+	}
+
+	public void setTempleName(String templeName) {
+		this.templeName = templeName;
+	}
+    
+    
 }

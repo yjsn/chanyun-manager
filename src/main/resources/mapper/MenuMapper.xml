@@ -9,6 +9,7 @@
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="p_id" jdbcType="INTEGER" property="parentId" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName" />
   </resultMap>
   <sql id="Base_Column_List">
     id, icon, name, state, url, p_id,sort
@@ -125,46 +126,44 @@
   <select id="selectMenuByPage" parameterType="com.chanyun.entity.Menu" resultMap="BaseResultMap">
 	  	select 
 	    <include refid="Base_Column_List" />
-	    from tb_menu
-    <trim prefix="where" prefixOverrides="and">
-      <if test="icon != null">
-        and icon = #{icon,jdbcType=VARCHAR}
-      </if>
-      <if test="name != null">
-        and name = #{name,jdbcType=VARCHAR}
-      </if>
-      <if test="state != null">
-        and state = #{state,jdbcType=INTEGER}
-      </if>
-      <if test="url != null">
-        and url = #{url,jdbcType=VARCHAR}
-      </if>
-      <if test="parentId != null">
-        and p_id = #{parentId,jdbcType=INTEGER}
-      </if>
-    </trim>
+	    ,
+	   (select name from tb_menu t1 where t1.id=t.p_id) parent_name from tb_menu t where t.state=1
+	      <if test="icon != null">
+	        and t.icon = #{icon,jdbcType=VARCHAR}
+	      </if>
+	      <if test="name != null">
+	        and t.name = #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="state != null">
+	        and t.state = #{state,jdbcType=INTEGER}
+	      </if>
+	      <if test="url != null">
+	        and t.url = #{url,jdbcType=VARCHAR}
+	      </if>
+	      <if test="parentId != null">
+	        and t.p_id = #{parentId,jdbcType=INTEGER}
+	      </if>
   </select>
   
   <select id="selectMenuByparams" parameterType="java.util.Map" resultMap="BaseResultMap">
   	select 
 	    <include refid="Base_Column_List" />
-	    from tb_menu
-    <trim prefix="where" prefixOverrides="and">
-      <if test="icon != null">
-        and icon = #{icon,jdbcType=VARCHAR}
-      </if>
-      <if test="name != null">
-        and name = #{name,jdbcType=VARCHAR}
-      </if>
-      <if test="state != null">
-        and state = #{state,jdbcType=INTEGER}
-      </if>
-      <if test="url != null">
-        and url = #{url,jdbcType=VARCHAR}
-      </if>
-      <if test="parentId != null">
-        and p_id = #{parentId,jdbcType=INTEGER}
-      </if>
-    </trim>
+	    ,
+	 	(select name from tb_menu t1 where t1.id=t.p_id) parent_name from tb_menu t where t.state=1
+	      <if test="icon != null">
+	        and t.icon = #{icon,jdbcType=VARCHAR}
+	      </if>
+	      <if test="name != null">
+	        and t.name = #{name,jdbcType=VARCHAR}
+	      </if>
+	      <if test="state != null">
+	        and t.state = #{state,jdbcType=INTEGER}
+	      </if>
+	      <if test="url != null">
+	        and t.url = #{url,jdbcType=VARCHAR}
+	      </if>
+	      <if test="parentId != null">
+	        and t.p_id = #{parentId,jdbcType=INTEGER}
+	      </if>
   </select>
 </mapper>

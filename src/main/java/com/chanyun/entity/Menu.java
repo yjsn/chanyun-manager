@@ -19,6 +19,8 @@ public class Menu {
     private Integer parentId;
 	@ApiModelProperty(value="排序",example="1")
 	private int sort;
+	@ApiModelProperty(value="父级菜单",example="系统设置")
+	private String parentName;
 
     public Integer getId() {
         return id;
@@ -75,6 +77,14 @@ public class Menu {
 
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
 	}
     
     

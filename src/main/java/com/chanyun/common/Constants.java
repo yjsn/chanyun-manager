@@ -53,6 +53,11 @@ public class Constants {
 	public final static int STATUS_ABLE=1;
 	
 	/**
+	 * 审核未通过
+	 */
+	public final static int STATUS_CHECK_FAIL=3;
+	
+	/**
 	 * 删除状态值
 	 */
 	public final static int STATUS_DELETE=99;

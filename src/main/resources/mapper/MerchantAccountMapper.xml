@@ -10,6 +10,7 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="temple_name" jdbcType="VARCHAR" property="templeName" />
   </resultMap>
   <sql id="Base_Column_List">
     id, account_number, account_password, account_name, temple_id, status, remark, create_time
@@ -127,8 +128,9 @@
   </update>
   <select id="findByPage" parameterType="com.chanyun.entity.MerchantAccount" resultMap="BaseResultMap">
   	 select 
-    <include refid="Base_Column_List" />
-    from tb_merchant_account
+    <include refid="Base_Column_List"></include>
+  	 , (select temple_name from tb_temple t1 where t1.id = t.temple_id ) temple_name
+  	 from tb_merchant_account t
     <trim prefix="where" prefixOverrides="and">
       <if test="accountNumber != null">
         account_number = #{accountNumber,jdbcType=VARCHAR}
@@ -183,8 +185,9 @@
   
   <select id="selectByParams" parameterType="java.util.Map" resultMap="BaseResultMap">
   	 select 
-  	 <include refid="Base_Column_List"></include> 
-  	 from tb_merchant_account
+  	 <include refid="Base_Column_List"></include>
+  	 , (select temple_name from tb_temple t1 where t1.id = t.temple_id ) temple_name
+  	 from tb_merchant_account t
 	    <trim prefix="where" prefixOverrides="and">
 	      <if test="accountNumber != null">
 	       and account_number = #{accountNumber,jdbcType=VARCHAR}
