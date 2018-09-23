@@ -131,7 +131,7 @@
 	      <if test="icon != null">
 	        and t.icon = #{icon,jdbcType=VARCHAR}
 	      </if>
-	      <if test="name != null">
+	      <if test="name != null and name !=''">
 	        and t.name = #{name,jdbcType=VARCHAR}
 	      </if>
 	      <if test="state != null">

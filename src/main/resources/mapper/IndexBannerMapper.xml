@@ -118,7 +118,7 @@
   <select id="selectIndexBanner" resultMap="BaseResultMap">
   	select  
   	<include refid="Base_Column_List" />
-  	from tb_index_banner where `status`=0 order by sort ASC,create_time desc LIMIT 4;
+  	from tb_index_banner where `status`=1 order by sort ASC,create_time desc LIMIT 4;
   </select>
   
   <select id="selectIndexBannerByPage" parameterType="com.chanyun.entity.IndexBanner" resultMap="BaseResultMap">

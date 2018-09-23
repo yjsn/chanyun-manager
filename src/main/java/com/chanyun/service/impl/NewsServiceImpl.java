@@ -41,7 +41,7 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public boolean edit(News news) {
-		int i = mapper.updateByPrimaryKey(news);
+		int i = mapper.updateByPrimaryKeySelective(news);
 		if(i>0) return true;
 		return false;
 	}

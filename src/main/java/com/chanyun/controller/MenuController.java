@@ -18,6 +18,7 @@ import com.chanyun.service.MenuService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 /**
 * <p>Title: MenuController.java</p>  
@@ -63,6 +64,7 @@ public class MenuController extends BaseController{
 	@PostMapping("/add")
 	@ResponseBody
 	public BaseResult<String> addMenu(@RequestBody Menu menu){
+		menu.setState(Constants.STATUS_ABLE);
 		Menu result = menuService.addMenu(menu);
 		if(null != result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "新增菜单成功", result);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "新增菜单失败，请重试", result);
@@ -75,6 +77,32 @@ public class MenuController extends BaseController{
 		boolean flag = menuService.editMenu(menu);
 		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改菜单成功", menu);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "修改菜单失败，请重试", null);
+	}
+	
+	@ApiOperation("禁用菜单")
+	@PostMapping("/disableMenu")
+	@ApiParam(value="菜单id",name="menuId")
+	@ResponseBody
+	public BaseResult<String> disableMenu(@RequestBody Menu menu){
+		menu.setId(menu.getId());
+		menu.setState(Constants.STATUS_DISABLE);
+		boolean flag = menuService.editMenu(menu);
+		menu=menuService.findMenuById(menu.getId());
+		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "禁用菜单成功", menu);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "禁用菜单失败，请重试", null);
+	}
+	
+	@ApiOperation("启用菜单")
+	@PostMapping("/ableMenu")
+	@ApiParam(value="菜单id",name="menuId")
+	@ResponseBody
+	public BaseResult<String> ableMenu(@RequestBody Menu menu){
+		menu.setId(menu.getId());
+		menu.setState(Constants.STATUS_ABLE);
+		boolean flag = menuService.editMenu(menu);
+		menu=menuService.findMenuById(menu.getId());
+		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "启用菜单成功", menu);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "启用菜单失败，请重试", null);
 	}
 	
 	@ApiOperation("获取父级菜单列表")

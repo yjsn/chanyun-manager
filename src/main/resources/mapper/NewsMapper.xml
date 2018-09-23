@@ -213,7 +213,7 @@
     	,
     	<include refid="Blob_Column_List" />
   		 from tb_news 
-  		 where news_status=0 and news_recommend=0 
+  		 where news_status=1 and news_recommend=0 
   		 order by news_sort ASC,create_time desc LIMIT 10;
   </select>
   
@@ -222,8 +222,7 @@
   		<include refid="Base_Column_List" />
     	,
     	<include refid="Blob_Column_List" />
-  		 from tb_news 
-  		 <trim prefix="where" prefixOverrides="and">
+  		 from tb_news where news_status != 99
   		 	  <if test="newsTitle != null">
 		         and news_title = #{newsTitle,jdbcType=VARCHAR}
 		      </if>
@@ -260,6 +259,5 @@
 		      <if test="newsContent != null">
 		        and news_content = #{newsContent,jdbcType=LONGVARCHAR}
 		      </if>
-  		 </trim>
   </select>
 </mapper>

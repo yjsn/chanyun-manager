@@ -97,7 +97,7 @@
        temple_name= #{templeName,jdbcType=VARCHAR},
       </if>
       <if test="templeDescription != null and templeDescription != ''">
-        temple_desciption=#{templeDescription,jdbcType=VARCHAR},
+        temple_description=#{templeDescription,jdbcType=VARCHAR},
       </if>
       <if test="templeCoverImg != null and templeCoverImg != ''">
        temple_cover_img= #{templeCoverImg,jdbcType=VARCHAR},
@@ -145,7 +145,7 @@
         and temple_name= #{templeName,jdbcType=VARCHAR}
       </if>
       <if test="templeDescription != null and templeDescription != ''">
-        and temple_desciption=#{templeDescription,jdbcType=VARCHAR}
+        and temple_description=#{templeDescription,jdbcType=VARCHAR}
       </if>
       <if test="templeCoverImg != null and templeCoverImg != ''">
         and temple_cover_img= #{templeCoverImg,jdbcType=VARCHAR}

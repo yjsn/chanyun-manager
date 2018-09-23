@@ -196,12 +196,12 @@ public class IndexManagerController extends BaseController<Object>{
 	@ApiOperation("禁用资讯信息")
 	@PostMapping("/disableNewsInfo")
 	@ResponseBody
-	public BaseResult<News> disableNewsInfo(@RequestBody int newsId){
-		News  news = new News();
-		news.setId(newsId);
-		news.setNewsStatus(Constants.STATUS_DISABLE);
-		boolean result = newsService.edit(news);
-		news = newsService.queryNewsById(newsId);
+	public BaseResult<News> disableNewsInfo(@RequestBody News news){
+		News updateNews = new News();
+		updateNews.setId(news.getId());
+		updateNews.setNewsStatus(Constants.STATUS_DISABLE);
+		boolean result = newsService.edit(updateNews);
+		news = newsService.queryNewsById(news.getId());
 		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息禁用成功", news);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息禁用失败", null);
 	}
@@ -210,12 +210,12 @@ public class IndexManagerController extends BaseController<Object>{
 	@ApiOperation("启用资讯信息")
 	@PostMapping("/ableNewsInfo")
 	@ResponseBody
-	public BaseResult<News> ableNewsInfo(@RequestBody int newsId){
+	public BaseResult<News> ableNewsInfo(@RequestBody News request){
 		News  news = new News();
-		news.setId(newsId);
+		news.setId(request.getId());
 		news.setNewsStatus(Constants.STATUS_ABLE);
 		boolean result = newsService.edit(news);
-		news = newsService.queryNewsById(newsId);
+		news = newsService.queryNewsById(request.getId());
 		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息启用成功", news);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息用户失败", null);
 	}
@@ -224,12 +224,12 @@ public class IndexManagerController extends BaseController<Object>{
 	@ApiOperation("删除资讯信息")
 	@PostMapping("/deleteNewsInfo")
 	@ResponseBody
-	public BaseResult<News> deleteNewsInfo(@RequestBody int newsId){
+	public BaseResult<News> deleteNewsInfo(@RequestBody News request){
 		News  news = new News();
-		news.setId(newsId);
+		news.setId(request.getId());
 		news.setNewsStatus(Constants.STATUS_DELETE);
 		boolean result = newsService.edit(news);
-		news = newsService.queryNewsById(newsId);
+		news = newsService.queryNewsById(request.getId());
 		if(result) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "信息禁用成功", null);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "信息禁用失败", null);
 	}

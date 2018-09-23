@@ -2,6 +2,7 @@ package com.chanyun.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,40 +72,43 @@ public class TempleController extends BaseController<Object> {
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@ApiOperation(value="寺庙禁用接口")
-	@PostMapping("/disableTemple")
+	@ApiParam(value="寺庙Id",name="templeId")
+	@PostMapping(value="/disableTemple",produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public BaseResult<Temple> disableTemple(@RequestBody int templeId){
-		Temple temple = new Temple();
-		temple.setId(templeId);
+	public BaseResult<Temple> disableTemple(@RequestBody Temple temple){
 		temple.setStatus(Constants.STATUS_DISABLE);
 		boolean flag = templeService.editTemple(temple);
+		temple = templeService.queryById(temple.getId());
 		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", temple);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value="寺庙启用/审核通过 接口")
+	@ApiParam(value="寺庙Id",name="templeId")
 	@PostMapping("/ableTemple")
 	@ResponseBody
-	public BaseResult<Temple> ableTemple(@RequestBody int templeId){
-		Temple temple = new Temple();
-		temple.setId(templeId);
+	public BaseResult<Temple> ableTemple(@RequestBody Temple temple){
+		temple.setId(temple.getId());
 		temple.setStatus(Constants.STATUS_ABLE);
 		boolean flag = templeService.editTemple(temple);
+		temple = templeService.queryById(temple.getId());
 		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", temple);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);
 	}
 	
 	@SuppressWarnings("unchecked")
-	@ApiOperation(value="寺庙启用/审核通过 接口")
+	@ApiOperation(value="寺庙审核不通过 接口")
+	@ApiParam(value="寺庙Id",name="templeId")
 	@PostMapping("/checkFail")
 	@ResponseBody
-	public BaseResult<Temple> checkFail(@RequestBody int templeId){
-		Temple temple = new Temple();
-		temple.setId(templeId);
+	public BaseResult<Temple> checkFail(@RequestBody Temple temple){
+		temple.setId(temple.getId());
 		temple.setStatus(Constants.STATUS_CHECK_FAIL);
 		boolean flag = templeService.editTemple(temple);
+		temple = templeService.queryById(temple.getId());
 		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", temple);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);
 	}
