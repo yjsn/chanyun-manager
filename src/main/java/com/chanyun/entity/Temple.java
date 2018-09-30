@@ -13,7 +13,7 @@ public class Temple {
     private String templeNumber;
 	@ApiModelProperty(value="寺庙名称",example="小普陀寺")
     private String templeName;
-	@ApiModelProperty(value="寺庙logo",example="url")
+	@ApiModelProperty(value="寺庙logo",example="https://chanyun.oss-cn-shanghai.aliyuncs.com/img/indexBanner/201809281612281742.png")
     private String templeLogo;
 	@ApiModelProperty(value="寺庙所在省",example="上海")
     private String templeProvince;

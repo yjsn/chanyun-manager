@@ -154,7 +154,7 @@ public class MerchantController extends BaseController<Object>{
 		//获取用户权限
 		int merchantId = account.getId();
 		List<Menu> result = menuService.queryMenuByMerchantId(merchantId);
-		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "登陆成功",result);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功",result);
 	}
 	
 	@ApiOperation("退出登陆接口")
