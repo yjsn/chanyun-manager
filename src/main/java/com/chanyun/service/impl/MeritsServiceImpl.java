@@ -14,6 +14,7 @@ import com.github.pagehelper.PageHelper;
 public class MeritsServiceImpl implements MeritsService{
 	@Autowired
 	private MeritsMapper meritsMapper;
+	
 	@Override
 	public PageInfo<Merits> findByPage(int pageNum, int pageSize,Merits merits) {
 		PageHelper.startPage(pageNum,pageSize);
@@ -22,5 +23,19 @@ public class MeritsServiceImpl implements MeritsService{
 		PageInfo<Merits> result = new PageInfo<Merits>(sqlResult);
 		return result;
 	}
+	
+	@Override
+	public Merits findById(int meritsId){
+		Merits merits = meritsMapper.selectByPrimaryKey(meritsId);
+		return merits;
+	}
 
+	@Override
+	public boolean updateMerits(Merits merits) {
+		int i = meritsMapper.updateByPrimaryKeySelective(merits);
+		if(i > 0) return true;
+		return false;
+	}
+
+	
 }

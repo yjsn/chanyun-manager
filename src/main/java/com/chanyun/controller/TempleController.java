@@ -91,9 +91,10 @@ public class TempleController extends BaseController<Object> {
 	@PostMapping("/ableTemple")
 	@ResponseBody
 	public BaseResult<Temple> ableTemple(@RequestBody Temple temple){
-		temple.setId(temple.getId());
-		temple.setStatus(Constants.STATUS_ABLE);
-		boolean flag = templeService.editTemple(temple);
+		Temple params = new Temple();
+		params.setId(temple.getId());
+		params.setStatus(Constants.STATUS_ABLE);
+		boolean flag = templeService.editTemple(params);
 		temple = templeService.queryById(temple.getId());
 		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", temple);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);
@@ -105,9 +106,10 @@ public class TempleController extends BaseController<Object> {
 	@PostMapping("/checkFail")
 	@ResponseBody
 	public BaseResult<Temple> checkFail(@RequestBody Temple temple){
-		temple.setId(temple.getId());
-		temple.setStatus(Constants.STATUS_CHECK_FAIL);
-		boolean flag = templeService.editTemple(temple);
+		Temple params = new Temple();
+		params.setId(temple.getId());
+		params.setStatus(Constants.STATUS_CHECK_FAIL);
+		boolean flag = templeService.editTemple(params);
 		temple = templeService.queryById(temple.getId());
 		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", temple);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);

@@ -28,4 +28,18 @@ public interface MeritsService {
 	 * @return
 	 */
 	public PageInfo<Merits> findByPage(int pageNum, int pageSize,Merits merits);
+	
+	/**
+	 * 根据id查询订单事件
+	 * @param meritsId
+	 * @return
+	 */
+	public Merits findById(int meritsId);
+	
+	/**
+	 * 更新订单信息
+	 * @param merits
+	 * @return
+	 */
+	public boolean updateMerits(Merits merits);
 }

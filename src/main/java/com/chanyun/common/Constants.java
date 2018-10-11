@@ -62,5 +62,41 @@ public class Constants {
 	 */
 	public final static int STATUS_DELETE=99;
 	
+	/**
+	 * 订单状态 申请
+	 */
+	public final static int MERITS_STATUS_APPLY=0;
+	
+	/**
+	 * 订单状态 申请支付
+	 */
+	public final static int MERITS_STATUS_APPLY_PAY=1;
+	
+	/**
+	 * 订单状态 已支付
+	 */
+	public final static int MERITS_STATUS_PAY=2;
+	
+	
+	/**
+	 * 订单状态  已完成
+	 */
+	public final static int MERITS_STATUS_COMPLETION=3;
+	
+	/**
+	 * 订单状态 未完成
+	 */
+	public final static int MERITS_STATUS_FAIL=4;
+	
+	/**
+	 * 订单状态 退款
+	 */
+	public final static int MERITS_STATUS_REFUND=5;
+	
+	/**
+	 * 订单状态 订单异常
+	 */
+	public final static int MERITS_STATUS_EXCEPTION=9;
+	
 	
 }

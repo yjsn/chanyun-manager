@@ -70,6 +70,8 @@ public class UploadController extends BaseController<Object>{
 				objectName=en.getProperty("oss.img.indexBanner");
 			}else if("temple".equals(folder)){//寺庙主页图片
 				objectName=en.getProperty("oss.img.indexBanner")+templeId+"/";
+			}else if("merits".equals(folder)){
+				objectName=en.getProperty("oss.img.merits")+templeId+"/";
 			}else{
 				return returnBaseResult(Constants.RESULT_CODE_CHECK_FAIL, "参数验证失败", "");
 			}
