@@ -76,8 +76,21 @@ public class MeritsController extends BaseController<Object>{
 		updateMeritsParams.setId(merits.getId());
 		boolean meritsFlag = meritsService.updateMerits(updateMeritsParams);
 		if(!meritsFlag) return returnBaseResult(Constants.RESULT_CODE_FAIL, "修改失败", null);
+		meritsDetailResult.setMerits(merits);
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", meritsDetailResult);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value= "订单详情查询")
+	@PostMapping("/meritsDetail")
+	@ResponseBody
+	public BaseResult<MeritsDetail> getMertisDetail(@RequestBody Merits merits){
+		MeritsDetail meritsDetail = meritsDetailService.queryMeritsDetailByMeritsId(merits.getId());
+		if(null != meritsDetail) {
+			Merits meritsChild = meritsService.findById(merits.getId());
+			meritsDetail.setMerits(meritsChild);
+		}
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功", meritsDetail);
+	}
 	
 }
