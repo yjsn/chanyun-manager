@@ -20,6 +20,7 @@ package com.chanyun.service;
 import java.util.List;
 import java.util.Map;
 
+import com.chanyun.bean.Route;
 import com.chanyun.common.PageInfo;
 import com.chanyun.entity.Menu;
 
@@ -50,7 +51,7 @@ public interface MenuService {
 	 * @return: List<Menu>      
 	 * @throws
 	 */
-	public List<Menu> queryMenuByMerchantId(Integer merchantId);
+	public List<Route> queryMenuByMerchantId(Integer merchantId);
 	
 	/**
 	 * 分页查询菜单列表

@@ -17,13 +17,16 @@
 */ 
 package com.chanyun.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chanyun.bean.Route;
 import com.chanyun.common.PageInfo;
 import com.chanyun.dao.MenuMapper;
 import com.chanyun.entity.Menu;
@@ -58,11 +61,43 @@ public class MenuServiceImpl implements MenuService {
 	 * @see com.chanyun.service.MenuService#queryMenuByMerchantId(java.lang.Integer)
 	 */
 	@Override
-	public List<Menu> queryMenuByMerchantId(Integer merchantId) {
-		
-		return menuMapper.selectMenuByMerchantId(merchantId);
+	public List<Route> queryMenuByMerchantId(Integer merchantId) {
+		List<Menu> menuList = menuMapper.selectMenuByMerchantId(merchantId);
+		List<Route> routeList = new ArrayList<Route>();
+		for (Menu menu : menuList) {
+			Route route = new Route(); 
+			if(menu.getParentId() == -1){//为一级菜单
+				route.setPath(menu.getUrl());
+				route.setChildren(getChild(menu.getId(), menuList));
+				routeList.add(route);
+			}
+		}
+		return routeList;
 	}
-
+	
+	/**
+	 * 递归查找子菜单
+	 * 
+	 * @param id
+	 *            当前菜单id
+	 * @param rootMenu
+	 *            要查找的列表
+	 * @return
+	 */
+	private List<Route> getChild(Integer id, List<Menu> rootMenu) {
+	    // 子菜单
+	    List<Route> childList = new ArrayList<Route>();
+	    for (Menu menu : rootMenu) {
+	        // 遍历所有节点，将父菜单id与传过来的id比较
+	        if (menu.getParentId().compareTo(id)  == 0) {
+	        		Route childRoute = new Route();
+	        		childRoute.setPath(menu.getUrl());
+	                childList.add(childRoute);
+	        }
+	    }
+	    return childList;
+	}
+	
 	@Override
 	public PageInfo<Menu> findMenuByPage(int pageNum, int pageSize, Menu menu) {
 		PageHelper.startPage(pageNum, pageSize);
