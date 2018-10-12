@@ -120,7 +120,7 @@
     from tb_menu
     where id in(
     	select menu_id from tb_role_menu where role_id in (select role_id from tb_merchant_role where merchant_id = #{merchantId,jdbcType=INTEGER})
-    ) and state=0
+    ) and state=1
   </select>
   
   <select id="selectMenuByPage" parameterType="com.chanyun.entity.Menu" resultMap="BaseResultMap">

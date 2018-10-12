@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import springfox.documentation.annotations.ApiIgnore;
 
+import com.chanyun.bean.Route;
 import com.chanyun.common.BaseResult;
 import com.chanyun.common.Constants;
 import com.chanyun.common.PageInfo;
@@ -145,7 +146,7 @@ public class MerchantController extends BaseController<Object>{
 	@ApiOperation(value="用户权限查询")
 	@PostMapping("/permission")
 	@ResponseBody
-	public BaseResult<List<Menu>> queryUserPermission(HttpServletRequest request){
+	public BaseResult<List<Route>> queryUserPermission(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		MerchantAccount account =(MerchantAccount) session.getAttribute("merchantAccount");
 		if(null == account)
@@ -153,7 +154,7 @@ public class MerchantController extends BaseController<Object>{
 		
 		//获取用户权限
 		int merchantId = account.getId();
-		List<Menu> result = menuService.queryMenuByMerchantId(merchantId);
+		List<Route> result = menuService.queryMenuByMerchantId(merchantId);
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功",result);
 	}
 	
