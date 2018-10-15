@@ -48,8 +48,12 @@ public class TempleMonkController extends BaseController<Object> {
 	@ApiOperation("查询寺庙僧人列表接口")
 	@PostMapping("queryPage")
 	@ResponseBody
-	public BaseResult<PageInfo<TempleMonk>> queryMonkList(@RequestBody QueryParams<TempleMonk> request){
-		PageInfo<TempleMonk> result = templeMonkService.queryByPage(request.getPageNum(), request.getPageSize(), request.getBean());
+	public BaseResult<PageInfo<TempleMonk>> queryMonkList(@RequestBody QueryParams<TempleMonk> params, HttpServletRequest request){
+		HttpSession session = request.getSession();
+		MerchantAccount account = (MerchantAccount) session.getAttribute("merchantAccount");
+		TempleMonk templeMonk = new TempleMonk();
+		templeMonk.setTempleId(account.getTempleId());
+		PageInfo<TempleMonk> result = templeMonkService.queryByPage(params.getPageNum(), params.getPageSize(), templeMonk);
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功", result);
 	}
 	

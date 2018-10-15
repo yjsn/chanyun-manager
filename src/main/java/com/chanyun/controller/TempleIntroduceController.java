@@ -45,9 +45,7 @@ public class TempleIntroduceController extends BaseController<Object> {
 		HttpSession session = request.getSession();
 		MerchantAccount account = (MerchantAccount) session.getAttribute("merchantAccount");
 		TempleIntroduce result = templeIntroduceService.queryTempleIntroduceByTempleId(account.getTempleId());
-		if(null != result.getId())
-			return returnBaseResult(Constants.RESULT_CODE_SUCCESS,"查询成功", result);
-		return returnBaseResult(Constants.RESULT_CODE_FAIL,"查询失败", null);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS,"查询成功", result);
 	}
 	
 	
