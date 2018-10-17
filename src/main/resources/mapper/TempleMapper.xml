@@ -216,7 +216,7 @@
   <select id="selectByParams" parameterType="com.chanyun.entity.Temple" resultMap="BaseResultMap">
   		select 
   		<include refid="Base_Column_List" />
-  		from tb_temple status = 1
+  		from tb_temple where status = 1
 	  	  <if test="templeNumber != null and templeNumber != ''">
 	        and temple_number = #{templeNumber,jdbcType=VARCHAR}
 	      </if>

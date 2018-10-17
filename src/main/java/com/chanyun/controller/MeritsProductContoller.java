@@ -29,7 +29,7 @@ public class MeritsProductContoller extends BaseController {
 	@PostMapping("page")
 	@ResponseBody
 	public BaseResult<PageInfo<MeritsProduct>> queryByPage(@RequestBody QueryParams<MeritsProduct> params){
-		PageInfo<MeritsProduct> result = meritsProductService.queryByPage(params.getPageSize(), params.getPageNum(), params.getBean());
+		PageInfo<MeritsProduct> result = meritsProductService.queryByPage(params.getPageNum(), params.getPageSize(), params.getBean());
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功", result);
 	}
 	
@@ -48,7 +48,35 @@ public class MeritsProductContoller extends BaseController {
 	@ResponseBody
 	public BaseResult<String> editMeritsProduct(@RequestBody MeritsProduct meritsProduct){
 		boolean result = meritsProductService.editMeritsProduct(meritsProduct);
-		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", result);
+		if(result) 
+			return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", meritsProduct);
+		return returnBaseResult(Constants.RESULT_CODE_FAIL, "修改失败", null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("禁用功德项目")
+	@PostMapping("disable")
+	@ResponseBody
+	public BaseResult<MeritsProduct> disableMeritsProduct(@RequestBody MeritsProduct meritsProduct){
+		MeritsProduct params = new MeritsProduct();
+		params.setId(meritsProduct.getId());
+		params.setMeritsStatus(Constants.STATUS_DISABLE);
+		boolean result = meritsProductService.editMeritsProduct(params);
+		if(result) meritsProduct = meritsProductService.queryById(meritsProduct.getId());
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", meritsProduct);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("启用功德项目")
+	@PostMapping("able")
+	@ResponseBody
+	public BaseResult<MeritsProduct> ableMeritsProduct(@RequestBody MeritsProduct meritsProduct){
+		MeritsProduct params = new MeritsProduct();
+		params.setId(meritsProduct.getId());
+		params.setMeritsStatus(Constants.STATUS_ABLE);
+		boolean result = meritsProductService.editMeritsProduct(params);
+		if(result) meritsProduct = meritsProductService.queryById(meritsProduct.getId());
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", meritsProduct);
 	}
 	
 }
