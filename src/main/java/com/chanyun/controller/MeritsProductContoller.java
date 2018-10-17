@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chanyun.common.BaseResult;
@@ -23,13 +24,31 @@ public class MeritsProductContoller extends BaseController {
 	@Autowired
 	private MeritsProductService meritsProductService;
 	
+	@SuppressWarnings("unchecked")
 	@ApiOperation("分页列表查询")
 	@PostMapping("page")
+	@ResponseBody
 	public BaseResult<PageInfo<MeritsProduct>> queryByPage(@RequestBody QueryParams<MeritsProduct> params){
 		PageInfo<MeritsProduct> result = meritsProductService.queryByPage(params.getPageSize(), params.getPageNum(), params.getBean());
 		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功", result);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("添加功德项目")
+	@PostMapping("add")
+	@ResponseBody
+	public BaseResult<MeritsProduct> addMeritsProduct(@RequestBody MeritsProduct meritsProduct){
+		MeritsProduct result = meritsProductService.addMeritsProduct(meritsProduct);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "添加成功", result);
+	}
 	
+	@SuppressWarnings("unchecked")
+	@ApiOperation("编辑功德项目")
+	@PostMapping("edit")
+	@ResponseBody
+	public BaseResult<String> editMeritsProduct(@RequestBody MeritsProduct meritsProduct){
+		boolean result = meritsProductService.editMeritsProduct(meritsProduct);
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", result);
+	}
 	
 }

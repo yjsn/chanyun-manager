@@ -1,5 +1,7 @@
 package com.chanyun.dao;
 
+import java.util.List;
+
 import com.chanyun.entity.Temple;
 import com.github.pagehelper.Page;
 
@@ -22,4 +24,6 @@ public interface TempleMapper {
      * @return
      */
     Page<Temple> selectByPage(Temple temple);
+    
+    List<Temple> selectByParams(Temple temple);
 }

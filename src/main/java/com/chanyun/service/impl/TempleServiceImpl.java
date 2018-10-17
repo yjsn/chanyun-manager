@@ -1,5 +1,7 @@
 package com.chanyun.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,12 @@ public class TempleServiceImpl implements TempleService {
 	@Override
 	public Temple queryById(int templeId) {
 		Temple result = mapper.selectByPrimaryKey(templeId);
+		return result;
+	}
+
+	@Override
+	public List<Temple> queryList(Temple temple) {
+		List<Temple> result = mapper.selectByParams(temple);
 		return result;
 	}
 

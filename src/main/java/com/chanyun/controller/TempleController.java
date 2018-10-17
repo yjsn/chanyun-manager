@@ -1,5 +1,7 @@
 package com.chanyun.controller;
 
+import java.util.List;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -113,5 +115,15 @@ public class TempleController extends BaseController<Object> {
 		temple = templeService.queryById(temple.getId());
 		if(flag) return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "修改成功", temple);
 		return returnBaseResult(Constants.RESULT_CODE_FAIL, "添加失败", temple);
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value="查询寺庙列表")
+	@PostMapping("/templeList")
+	@ResponseBody
+	public BaseResult<List<Temple>> getTempleList(){
+		List<Temple> result = templeService.queryList(new Temple());
+		return returnBaseResult(Constants.RESULT_CODE_SUCCESS, "查询成功", result);
 	}
 }

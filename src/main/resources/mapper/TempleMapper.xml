@@ -213,4 +213,42 @@
   		</trim>
   </select>
   
+  <select id="selectByParams" parameterType="com.chanyun.entity.Temple" resultMap="BaseResultMap">
+  		select 
+  		<include refid="Base_Column_List" />
+  		from tb_temple status = 1
+	  	  <if test="templeNumber != null and templeNumber != ''">
+	        and temple_number = #{templeNumber,jdbcType=VARCHAR}
+	      </if>
+	      <if test="templeName != null and templeName != ''">
+	        and temple_name = #{templeName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="templeLogo != null and templeLogo != ''">
+	        and temple_logo = #{templeLogo,jdbcType=VARCHAR}
+	      </if>
+	      <if test="templeProvince != null and templeProvince != ''">
+	        and temple_province = #{templeProvince,jdbcType=VARCHAR}
+	      </if>
+	      <if test="templeCity != null and templeCity != ''">
+	        and temple_city = #{templeCity,jdbcType=VARCHAR}
+	      </if>
+	      <if test="templeCounty != null and templeCounty != ''">
+	        and temple_county = #{templeCounty,jdbcType=VARCHAR}
+	      </if>
+	      <if test="templeAddress != null and templeAddress != ''">
+	        and temple_address = #{templeAddress,jdbcType=VARCHAR}
+	      </if>
+	      <if test="status != null">
+	        and status = #{status,jdbcType=INTEGER}
+	      </if>
+	      <if test="templeContactName != null and templeContactName != ''">
+	        and temple_contact_name = #{templeContactName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="templeContactTel != null and templeContactTel != ''">
+	        and temple_contact_tel = #{templeContactTel,jdbcType=VARCHAR}
+	      </if>
+	      <if test="createTime != null">
+	        and create_time = #{createTime,jdbcType=TIMESTAMP}
+	      </if>
+  </select>
 </mapper>
