@@ -65,8 +65,8 @@ public class MeritsController extends BaseController<Object>{
 		MerchantAccount merchantAccount = (MerchantAccount) session.getAttribute("merchantAccount");
 		if(null == merchantAccount) return returnBaseResult(Constants.RESULT_CODE_FAIL, "用户信息错误", null);
 		Merits merits = meritsService.findById(meritsDetail.getMeritsId());
-		if(merits.getTempleId().compareTo(merchantAccount.getTempleId()) != 0) //校验用户账号与订单是否关联
-			return returnBaseResult(Constants.RESULT_CODE_CHECK_FAIL, "修改失败,用户不涌修改此订单信息", null);
+		if(merits.getTempleId().compareTo(merchantAccount.getTempleId()) != 0 && merchantAccount.getTempleId() != 0) //校验用户账号与订单是否关联,0为超级管理用户
+			return returnBaseResult(Constants.RESULT_CODE_CHECK_FAIL, "修改失败,用户无权限修改此订单信息", null);
 		//更新订单详情信息
 		MeritsDetail meritsDetailResult = meritsDetailService.updateOrInsertMertsDetail(meritsDetail);
 		if(null == meritsDetailResult) return returnBaseResult(Constants.RESULT_CODE_FAIL, "修改失败", null);
